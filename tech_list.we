@@ -1,0 +1,84 @@
+<template>
+  <container style="background-color: #e6e7e8;">
+    <container class="div-box">
+      <text class="title">这里有以下接口：if, onclick, get, set, img src</text>
+      <image style='width: 150px; height: 80px' src="{{imgsrc}}" if="{{tag}}"></image>
+      <text>{{fullName}}</text>
+      <text if="tag">Hello tag</text>
+      <text if="{{tag}}">Hello {{}} tag</text>
+
+      <text class="buttonclick" onclick="changeName">改名字</text>
+    </container>
+    <container repeat="{{list}}" class="{{gender}}">
+      <image src="{{avatar}}" style='width: 50px; height: 50px'></image>
+      <text>No.{{$index + 1}} : {{nickname}} - {{group}}</text>
+      <text>{{title}}</text>
+    </container>
+  </container>
+</template>
+<style>
+  .div-box{
+    padding: 8px;
+    background-color: #ffffff;
+    margin-bottom: 10px;
+  }
+  .title{
+    font-size: 16px;
+    color: #ff0000;
+    padding: 8px;
+    font-weight: bold;
+  }
+  .buttonclick{
+    background-color: #666;
+    color: #fff;
+    padding: 8px;
+  }
+  .male{
+    color: red;
+  }
+  .female{
+    color: blue;
+  }
+</style>
+<script>
+  module.exports = {
+    data: {
+      firstName: 'John',
+      lastName: 'Smith',
+      tag:true,
+      imgsrc:"http://business.cdn.qianqian.com/qianqian/pic/bos_client_abf5b611e9b66a24887942babb050afc.jpg",
+      group:"group",
+      list:[
+        {gender:"male", nickname:"Li leilei", avatar:"http://business.cdn.qianqian.com/qianqian/pic/bos_client_abf5b611e9b66a24887942babb050afc.jpg"},
+        {gender:"female", nickname:"Han meimei", avatar:"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"},
+        {gender:"male", nickname:"Close Tome", avatar:"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"}
+      ],
+      title:null
+    },
+    computed: {
+      fullName: {
+        get: function() {
+          return this.firstName + ' ' + this.lastName
+        },
+
+        set: function(v) {
+          var s = v.split(' ')
+          this.firstName = s[0]
+          this.lastName = s[1]
+        }
+      }
+    },
+    methods: {
+      changeName: function() {
+        if(this.tag){
+          this.fullName = 'Terry King';
+          this.imgsrc = "http://business.cdn.qianqian.com/qianqian/pic/bos_client_abf5b611e9b66a24887942babb050afc.jpg";
+        }else{
+          this.imgsrc = "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png";
+          this.fullName = 'John Smith';
+        }
+        this.tag = !this.tag;
+      }
+    }
+  }
+</script>

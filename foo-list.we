@@ -1,0 +1,15 @@
+<!-- somepath/foo.list.we -->
+<template>
+  <container>
+    <text>{{description}}</text>
+    <foo repeat="{{list}}" title="{{text}}" image="{{img}}"></foo>
+  </container>
+</template>
+<script>
+  module.exports = {
+    data: {
+      description: '',
+      list: []
+    }
+  }
+</script>
