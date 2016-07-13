@@ -1,0 +1,35 @@
+<template>
+  <container style="background-color: #e6e7e8;">
+    <foo-list list="{{foolist}}"></foo-list>
+    <container repeat="{{list}}" class="{{gender}}">
+      <image src="{{avatar}}" style='width: 50px; height: 50px'></image>
+      <text>No.{{$index + 1}} : {{nickname}} - {{group}}</text>
+      <text>{{title}}</text>
+    </container>
+  </container>
+</template>
+<style type="text/css">
+  .male{
+    color: red;
+  }
+  .female{
+    color: blue;
+  }
+</style>
+<script>
+  module.exports = {
+    data: {
+      list:[
+        {gender:"male", nickname:"Li leilei", avatar:"http://business.cdn.qianqian.com/qianqian/pic/bos_client_abf5b611e9b66a24887942babb050afc.jpg"},
+        {gender:"female", nickname:"Han meimei", avatar:"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"},
+        {gender:"male", nickname:"Close Tome", avatar:"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"}
+      ],
+      foolist: [
+        {text: "tome0", img:"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"},
+        {text: "tome1", img:"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"},
+        {text: "tome2", img:"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"},
+        {text: "tome3", img:"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"}
+      ]
+    }
+  }
+</script>

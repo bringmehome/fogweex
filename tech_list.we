@@ -9,10 +9,19 @@
 
       <text class="buttonclick" onclick="changeName">改名字</text>
     </container>
-    <container repeat="{{list}}" class="{{gender}}">
-      <image src="{{avatar}}" style='width: 50px; height: 50px'></image>
-      <text>No.{{$index + 1}} : {{nickname}} - {{group}}</text>
-      <text>{{title}}</text>
+    <container class="div-box">
+      <container repeat="{{list}}" class="{{gender}}">
+        <image src="{{avatar}}" style='width: 50px; height: 50px'></image>
+        <text>No.{{$index + 1}} : {{nickname}} - {{group}}</text>
+        <text>{{title}}</text>
+      </container>
+    </container>
+    <container class="div-box">
+      <foo-list list="{{foolist}}"></foo-list>
+    </container>
+    <container>
+      <image id="{{imgId}}" src="{{imgUrl}}" onclick="getImageId" repeat="{{images}}" style='width: 50px; height: 50px'></image>
+      <text>{{myid}}</text>
     </container>
   </container>
 </template>
@@ -53,7 +62,19 @@
         {gender:"female", nickname:"Han meimei", avatar:"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"},
         {gender:"male", nickname:"Close Tome", avatar:"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"}
       ],
-      title:null
+      foolist: [
+        {text: "tome1", img:"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"},
+        {text: "tome2", img:"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"},
+        {text: "tome3", img:"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"},
+        {text: "tome4", img:"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"}
+      ],
+      images:[
+        {imgId: 1, imgUrl: "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"},
+        {imgId: 2, imgUrl: "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"},
+        {imgId: 3, imgUrl: "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"}
+      ],
+      title:null,
+      myid:45
     },
     computed: {
       fullName: {
@@ -78,6 +99,10 @@
           this.fullName = 'John Smith';
         }
         this.tag = !this.tag;
+      },
+      getImageId: function(e) {
+        // get e.target.id
+        this.myid = e.target.id;
       }
     }
   }

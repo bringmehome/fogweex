@@ -1,4 +1,3 @@
-<!-- somepath/foo.list.we -->
 <template>
   <container>
     <text>{{description}}</text>

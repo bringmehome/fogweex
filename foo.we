@@ -1,0 +1,16 @@
+<template>
+  <container style="flex-direction: row;">
+  	<text>{{ehtid}}</text>
+    <image src="{{image}}" style='width: 50px; height: 50px'></image>
+    <text>{{title}}</text>
+  </container>
+</template>
+<script>
+  module.exports = {
+    data: {
+      title: null,
+      image: null,
+      ehtid:"789"
+    }
+  }
+</script>

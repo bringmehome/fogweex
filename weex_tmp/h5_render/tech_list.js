@@ -1,3 +1,89 @@
+define('@weex-component/foo', function (require, exports, module) {
+
+;
+  module.exports = {
+    data: function () {return {
+      title: null,
+      image: null,
+      ehtid:"789"
+    }}
+  }
+
+
+;module.exports.style = {}
+
+;module.exports.template = {
+  "type": "container",
+  "style": {
+    "flexDirection": "row"
+  },
+  "children": [
+    {
+      "type": "text",
+      "attr": {
+        "value": function () {return this.ehtid}
+      }
+    },
+    {
+      "type": "image",
+      "attr": {
+        "src": function () {return this.image}
+      },
+      "style": {
+        "width": 50,
+        "height": 50
+      }
+    },
+    {
+      "type": "text",
+      "attr": {
+        "value": function () {return this.title}
+      }
+    }
+  ]
+}
+
+;})
+
+// module
+
+define('@weex-component/foo-list', function (require, exports, module) {
+
+;
+  module.exports = {
+    data: function () {return {
+      description: '',
+      list: []
+    }}
+  }
+
+
+;module.exports.style = {}
+
+;module.exports.template = {
+  "type": "container",
+  "children": [
+    {
+      "type": "text",
+      "attr": {
+        "value": function () {return this.description}
+      }
+    },
+    {
+      "type": "foo",
+      "repeat": function () {return this.list},
+      "attr": {
+        "title": function () {return this.text},
+        "image": function () {return this.img}
+      }
+    }
+  ]
+}
+
+;})
+
+// module
+
 define('@weex-component/tech_list', function (require, exports, module) {
 
 ;
@@ -13,7 +99,19 @@ define('@weex-component/tech_list', function (require, exports, module) {
         {gender:"female", nickname:"Han meimei", avatar:"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"},
         {gender:"male", nickname:"Close Tome", avatar:"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"}
       ],
-      title:null
+      foolist: [
+        {text: "tome1", img:"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"},
+        {text: "tome2", img:"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"},
+        {text: "tome3", img:"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"},
+        {text: "tome4", img:"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"}
+      ],
+      images:[
+        {imgId: 1, imgUrl: "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"},
+        {imgId: 2, imgUrl: "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"},
+        {imgId: 3, imgUrl: "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"}
+      ],
+      title:null,
+      myid:45
     }},
     computed: {
       fullName: {
@@ -38,6 +136,10 @@ define('@weex-component/tech_list', function (require, exports, module) {
           this.fullName = 'John Smith';
         }
         this.tag = !this.tag;
+      },
+      getImageId: function(e) {
+        // get e.target.id
+        this.myid = e.target.id;
       }
     }
   }
@@ -136,14 +238,68 @@ define('@weex-component/tech_list', function (require, exports, module) {
     },
     {
       "type": "container",
-      "repeat": function () {return this.list},
-      "classList": function () {return [this.gender]},
+      "classList": [
+        "div-box"
+      ],
+      "children": [
+        {
+          "type": "container",
+          "repeat": function () {return this.list},
+          "classList": function () {return [this.gender]},
+          "children": [
+            {
+              "type": "image",
+              "attr": {
+                "src": function () {return this.avatar}
+              },
+              "style": {
+                "width": 50,
+                "height": 50
+              }
+            },
+            {
+              "type": "text",
+              "attr": {
+                "value": function () {return 'No.' + (this.$index+1) + ' : ' + (this.nickname) + ' - ' + (this.group)}
+              }
+            },
+            {
+              "type": "text",
+              "attr": {
+                "value": function () {return this.title}
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "container",
+      "classList": [
+        "div-box"
+      ],
+      "children": [
+        {
+          "type": "foo-list",
+          "attr": {
+            "list": function () {return this.foolist}
+          }
+        }
+      ]
+    },
+    {
+      "type": "container",
       "children": [
         {
           "type": "image",
+          "id": function () {return this.imgId},
           "attr": {
-            "src": function () {return this.avatar}
+            "src": function () {return this.imgUrl}
           },
+          "events": {
+            "click": "getImageId"
+          },
+          "repeat": function () {return this.images},
           "style": {
             "width": 50,
             "height": 50
@@ -152,13 +308,7 @@ define('@weex-component/tech_list', function (require, exports, module) {
         {
           "type": "text",
           "attr": {
-            "value": function () {return 'No.' + (this.$index+1) + ' : ' + (this.nickname) + ' - ' + (this.group)}
-          }
-        },
-        {
-          "type": "text",
-          "attr": {
-            "value": function () {return this.title}
+            "value": function () {return this.myid}
           }
         }
       ]
