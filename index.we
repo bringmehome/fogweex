@@ -10,6 +10,7 @@
       <text class="buttonclick" onclick="changeName">改名字</text>
     </container>
     <container class="div-box">
+      <text class="title">列表显示</text>
       <container repeat="{{list}}" class="{{gender}}">
         <image src="{{avatar}}" style='width: 50px; height: 50px'></image>
         <text>No.{{$index + 1}} : {{nickname}} - {{group}}</text>
@@ -17,14 +18,59 @@
       </container>
     </container>
     <container class="div-box">
+      <text class="title">关联其他的.we文件</text>
       <foo-list list="{{foolist}}"></foo-list>
     </container>
     <container>
-      <image id="{{imgId}}" src="{{imgUrl}}" onclick="getImageId" repeat="{{images}}" style='width: 50px; height: 50px'></image>
+      <text class="title">自定义tpid</text>
+      <image tpid="{{imgId}}" src="{{imgUrl}}" onclick="getImageId" repeat="{{images}}" style='width: 50px; height: 50px'></image>
       <text>{{myid}}</text>
+    </container>
+    <container class="div-box">
+      <text class="title">dispatch:子模块往父亲模块发送消息，broadcast：父亲模块往子模块发送消息</text>
+      <foos title="fooimg" image-url="http://business.cdn.qianqian.com/qianqian/pic/bos_client_abf5b611e9b66a24887942babb050afc.jpg"></foos>
+      <text onclick="changeTitle">往子模块发送</text>
+    </container>
+    <container class="div-box">
+      <text class="title">调用自定义模块</text>
+      <text onclick="myUrl">调用myUrl</text>
+    </container>
+    <container class="div-box">
+      <text class="title">使用第三方模块</text>
+      <text onclick="require3rd">使用第三方模块</text>
     </container>
   </container>
 </template>
+<we-element name="foos">
+  <template>
+    <div>
+      <image src="{{imageUrl}}" onclick="test" style='width: 50px; height: 50px'></image>
+      <text>{{title}}</text>
+    </div>
+  </template>
+  <script>
+    module.exports = {
+      data: {
+        title: '',
+        imageUrl: ''
+      },
+      methods: {
+        test: function () {
+          this.$dispatch('notify', {a: 1, c:23, d:"I 44 m tom"});
+        }
+      },
+      created:function(){
+          var self = this
+          this.$on('changeTitle', function(e) {
+            console.log("broadcast", e.detail);
+            self.title = e.detail.title;
+          });
+      }
+    }
+  </script>
+</we-element>
+
+
 <style>
   .div-box{
     padding: 8px;
@@ -33,7 +79,7 @@
   }
   .title{
     font-size: 16px;
-    color: #ff0000;
+    color: #00ff00;
     padding: 8px;
     font-weight: bold;
   }
@@ -50,6 +96,7 @@
   }
 </style>
 <script>
+
   module.exports = {
     data: {
       firstName: 'John',
@@ -69,12 +116,20 @@
         {text: "tome4", img:"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"}
       ],
       images:[
-        {imgId: 1, imgUrl: "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"},
-        {imgId: 2, imgUrl: "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"},
-        {imgId: 3, imgUrl: "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"}
+        {imgId: 101, imgUrl: "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"},
+        {imgId: 102, imgUrl: "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"},
+        {imgId: 103, imgUrl: "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"}
       ],
       title:null,
       myid:45
+    },
+    created: function () {
+      this.$on('notify', function(e) {
+        //  when <foo> image tag  be clicked ,the function will be executing.
+        // e.detail is  `{a: 1}`
+        console.log("e", e.detail);
+      });
+
     },
     computed: {
       fullName: {
@@ -83,9 +138,9 @@
         },
 
         set: function(v) {
-          var s = v.split(' ')
-          this.firstName = s[0]
-          this.lastName = s[1]
+          var s = v.split(' ');
+          this.firstName = s[0];
+          this.lastName = s[1];
         }
       }
     },
@@ -102,7 +157,26 @@
       },
       getImageId: function(e) {
         // get e.target.id
-        this.myid = e.target.id;
+        this.myid = e.target.attr.tpid;
+        console.log(e, e.target.attr.tpid);
+      },
+      changeTitle:function(){
+        this.$broadcast('changeTitle', {title:"广播标题"});
+      },
+      myUrl:function(){
+        var URLHelper = require('@weex-module/myURL');//same as you registered
+        URLHelper.openURL("http://www.taobao.com",function(ts){
+            console.log("url is open at ----- >>>>>  "+ts);
+        });
+      },
+      require3rd:function(){
+        var _ = require('underscore');
+        var obj1 = {a: 1}
+        var obj2 = {b: 2}
+        var obj3 = {c: 3}
+
+        var ret = _.extend(obj1, obj2, obj3)
+        console.log(JSON.stringify(ret));
       }
     }
   }
