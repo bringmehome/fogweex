@@ -1,0 +1,43 @@
+<template>
+  <div style="flex-direction: column;">
+    <wxc-tabbar tab-items = {{tabItems}}></wxc-tabbar>
+  </div>
+</template>
+
+<script>
+  require('weex-components');
+  module.exports = {
+    data: {
+      tabItems: [
+        {
+          index: 0,
+          title: '首页',
+          titleColor: '#000000',
+          icon: '',//蓝色
+          image: 'http://cdn-img.easyicon.net/png/5101/510198.gif',
+          selectedImage: 'http://cdn-img.easyicon.net/png/5102/510214.gif',//红色
+          src: 'http://www.baidu.com',
+          // visibility: 'visible',
+        },
+        {
+          index: 1,
+          title: '我的',
+          titleColor: '#000000',
+          icon: '',
+          image: 'http://cdn-img.easyicon.net/png/5102/510214.gif',
+          selectedImage: 'http://cdn-img.easyicon.net/png/5101/510198.gif',
+          src: 'http://www.qq.com',
+          // visibility: 'hidden',
+        },
+      ]
+    },
+    methods: {
+      ready: function (e) {
+        var vm = this;
+        vm.$on('tabBar.onClick',function(e){
+          // var index = e.detail.index;
+        });
+      }
+    }
+  }
+</script>

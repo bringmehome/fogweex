@@ -1,45 +1,97 @@
-<template>
-  <container style="background-color: #e6e7e8;">
-    <container class="div-box">
-      <text class="title">这里有以下接口：if, onclick, get, set, img src</text>
-      <image style='width: 150px; height: 80px' src="{{imgsrc}}" if="{{tag}}"></image>
-      <text>{{fullName}}</text>
-      <text if="tag">Hello tag</text>
-      <text if="{{tag}}">Hello {{}} tag</text>
+<!-- <template>
+        <div style="width: 300; height: 100;">
+          <image src="http://business.cdn.qianqian.com/qianqian/pic/bos_client_abf5b611e9b66a24887942babb050afc.jpg" style="width: 100; height: 100;"></image>
+          <text style="flex: 1;">ddd</text>
+          <switch checked="true"></switch>
+        </div>
+</template> -->
 
-      <text class="buttonclick" onclick="changeName">改名字</text>
-    </container>
-    <container class="div-box">
-      <text class="title">列表显示</text>
-      <container repeat="{{list}}" class="{{gender}}">
-        <image src="{{avatar}}" style='width: 50px; height: 50px'></image>
-        <text>No.{{$index + 1}} : {{nickname}} - {{group}}</text>
-        <text>{{title}}</text>
+<template>
+<!--   <list>
+    <cell repeat="{{cases}}">
+      <index-item title="{{title}}" url="{{url}}"></index-item>
+    </cell>
+  </list> -->
+  <!-- 在最外面加个scroller就可以上下滚动了 -->
+  <scroller>
+    <container style="background-color: #e6e7e8;">
+      <container>
+      <text class="buttonclick" onclick="stremobj">POST</text>
+      <text class="buttonclick" onclick="fetchFunc">Fetch</text>
+      </container>
+
+     <!--  <container>
+        <div>
+          <web style="width:100%; height:500;" src="http://www.baidu.com" onpagestart="pagestart" onpagefinish="pagefinish" onerror="error">
+          </web>
+        </div>
+      </container> -->
+      <!-- <container>
+        <text class="title">video</text>
+        <div>
+            <video class="video" controls="controls" src="http://www.w3school.com.cn/i/movie.ogg" style="width:500;height:500;"></video>
+        </div>
+      </container> -->
+      <container>
+        <text class="title">slider</text>
+        <div>
+          <slider class="slider">
+            <div class="slider-pages" repeat="{{itemList}}">
+              <image class="img" src="{{pictureUrl}}"></image>
+              <text class="title">{{title}}</text>
+            </div>
+
+            <indicator class="indicator"></indicator>
+          </slider>
+        </div>
+      </container>
+      <container>
+        <div style="width: {{w}}; height: {{h}}; background-color: red;" onclick="update"></div>
+      </container>
+      <container class="div-box">
+        <text class="title">richtext</text>
+        <richtext tel="13122556653" style="width:200px;height:100px;"></richtext>
+      </container>
+      <container class="div-box">
+        <text class="title">这里有以下接口：if, onclick, get, set, img src</text>
+        <image style='width: 150px; height: 80px' src="{{imgsrc}}" if="{{tag}}"></image>
+        <text>{{fullName}}</text>
+        <text if="tag">Hello tag</text>
+        <text if="{{tag}}">Hello {{}} tag</text>
+        <text class="buttonclick" onclick="changeName">改名字</text>
+      </container>
+      <container class="div-box">
+        <text class="title">列表显示</text>
+        <container repeat="{{list}}" class="{{gender}}">
+          <image src="{{avatar}}" style='width: 50px; height: 50px'></image>
+          <text>No.{{$index + 1}} : {{nickname}} - {{group}}</text>
+          <text>{{title}}</text>
+        </container>
+      </container>
+      <container class="div-box">
+        <text class="title">关联其他的.we文件</text>
+        <foo-list list="{{foolist}}"></foo-list>
+      </container>
+      <container>
+        <text class="title">自定义tpid</text>
+        <image tpid="{{imgId}}" src="{{imgUrl}}" onclick="getImageId" repeat="{{images}}" style='width: 50px; height: 50px'></image>
+        <text>{{myid}}</text>
+      </container>
+      <container class="div-box">
+        <text class="title">dispatch:子模块往父亲模块发送消息，broadcast：父亲模块往子模块发送消息</text>
+        <foos title="fooimg" image-url="http://business.cdn.qianqian.com/qianqian/pic/bos_client_abf5b611e9b66a24887942babb050afc.jpg"></foos>
+        <text onclick="changeTitle">往子模块发送</text>
+      </container>
+      <container class="div-box">
+        <text class="title">调用自定义模块</text>
+        <text onclick="myUrl">调用myUrl</text>
+      </container>
+      <container class="div-box">
+        <text class="title">使用第三方模块</text>
+        <text onclick="require3rd">使用第三方模块</text>
       </container>
     </container>
-    <container class="div-box">
-      <text class="title">关联其他的.we文件</text>
-      <foo-list list="{{foolist}}"></foo-list>
-    </container>
-    <container>
-      <text class="title">自定义tpid</text>
-      <image tpid="{{imgId}}" src="{{imgUrl}}" onclick="getImageId" repeat="{{images}}" style='width: 50px; height: 50px'></image>
-      <text>{{myid}}</text>
-    </container>
-    <container class="div-box">
-      <text class="title">dispatch:子模块往父亲模块发送消息，broadcast：父亲模块往子模块发送消息</text>
-      <foos title="fooimg" image-url="http://business.cdn.qianqian.com/qianqian/pic/bos_client_abf5b611e9b66a24887942babb050afc.jpg"></foos>
-      <text onclick="changeTitle">往子模块发送</text>
-    </container>
-    <container class="div-box">
-      <text class="title">调用自定义模块</text>
-      <text onclick="myUrl">调用myUrl</text>
-    </container>
-    <container class="div-box">
-      <text class="title">使用第三方模块</text>
-      <text onclick="require3rd">使用第三方模块</text>
-    </container>
-  </container>
+  </scroller>
 </template>
 <we-element name="foos">
   <template>
@@ -69,37 +121,22 @@
     }
   </script>
 </we-element>
-
-
-<style>
-  .div-box{
-    padding: 8px;
-    background-color: #ffffff;
-    margin-bottom: 10px;
-  }
-  .title{
-    font-size: 16px;
-    color: #00ff00;
-    padding: 8px;
-    font-weight: bold;
-  }
-  .buttonclick{
-    background-color: #666;
-    color: #fff;
-    padding: 8px;
-  }
-  .male{
-    color: red;
-  }
-  .female{
-    color: blue;
-  }
-</style>
 <script>
-
+  // TODO ontouch highlight
   module.exports = {
     data: {
-      firstName: 'John',
+      cases: [
+        {name: 'test', title: 'Test', url: ''},
+        {name: 'test', title: 'Test', url: ''},
+        {name: 'test', title: 'Test', url: ''},
+        {name: 'test', title: 'Test', url: ''},
+        {name: 'test', title: 'Test', url: ''},
+        {name: 'test', title: 'Test', url: ''},
+        {name: 'test', title: 'Test', url: ''},
+        {name: 'test', title: 'Test', url: ''},
+        {name: 'test', title: 'Test', url: ''}
+      ],
+       firstName: 'John',
       lastName: 'Smith',
       tag:true,
       imgsrc:"http://business.cdn.qianqian.com/qianqian/pic/bos_client_abf5b611e9b66a24887942babb050afc.jpg",
@@ -121,15 +158,31 @@
         {imgId: 103, imgUrl: "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"}
       ],
       title:null,
-      myid:45
+      myid:45,
+      w:750,
+      h:200,
+     itemList: [
+        {itemId: '520421163634', title: 'item1', pictureUrl: 'https://gd2.alicdn.com/bao/uploaded/i2/T14H1LFwBcXXXXXXXX_!!0-item_pic.jpg'},
+        {itemId: '522076777462', title: 'item2', pictureUrl: 'https://gd1.alicdn.com/bao/uploaded/i1/TB1PXJCJFXXXXciXFXXXXXXXXXX_!!0-item_pic.jpg'},
+        {itemId: '522076777462', title: 'iten3', pictureUrl: 'https://gd3.alicdn.com/bao/uploaded/i3/TB1x6hYLXXXXXazXVXXXXXXXXXX_!!0-item_pic.jpg'}
+      ]
+    },
+    // init: 在视图模型的构造函数开始调用时激活；
+    // created: 当视图模型监听默认数据，但还未编译模板时激活；
+    // ready: 当视图模型监听默认数据并且编译模板生成虚拟DOM后被激活。
+    init: function () {
+      console.log('ViewModel constructor begins')
+    },
+    ready: function () {
+      console.log('Virtual DOM finished')
     },
     created: function () {
+      console.log('Data observation finished')
       this.$on('notify', function(e) {
         //  when <foo> image tag  be clicked ,the function will be executing.
         // e.detail is  `{a: 1}`
         console.log("e", e.detail);
       });
-
     },
     computed: {
       fullName: {
@@ -145,6 +198,9 @@
       }
     },
     methods: {
+      change: function (e) {
+
+      },
       changeName: function() {
         if(this.tag){
           this.fullName = 'Terry King';
@@ -177,7 +233,158 @@
 
         var ret = _.extend(obj1, obj2, obj3)
         console.log(JSON.stringify(ret));
+      },
+      update: function (e) {
+        this.h += 200
+      },
+      error:function(){
+
+      },
+      stremobj:function(){
+        var arg1 = 'I am alert!'
+        var arg2 = 'I am ok'
+        var arg3 = 'I am cancel'
+        var modal = require('@weex-module/modal');
+        modal.confirm({
+          message: arg1,
+          okTitle: arg2,
+          cancelTitle: arg3
+        }, function(result) {
+          nativeLog(result)
+          // TODO after the confirm is complete.
+        });
+      },
+      fetchFunc:function(){
+        console.log("stream");
+        var stream = require('@weex-module/stream');
+        stream.fetch({
+          method: 'POST',
+          url: 'https://v2.fogcloud.io/enduser/getVerCode/',
+          type:'json',
+          body: {
+            "loginname":"88635653@qq.com",
+            "appid":"db456b4a-17fc-11e6-a739-00163e0204c0"
+          }   
+        }, function(response) {
+          console.log("res 1:"+JSON.stringify(response));
+          //process response
+        },function(response){
+          console.log("bytes received:"+response.length);
+        });
+
+
+
+        // fetch(
+        //   'http://httpbin.org/post', 
+        //   { 
+        //     method: 'POST', 
+        //     body: 'a=1' 
+        //   })
+        // .then(function(res) {
+        //   console.log("res 1:"+JSON.stringify(res));
+        // })
+        // .then(function(json){
+        //   console.log("json 2:"+JSON.stringify(json));
+        // });
+
+
+        // fetch(
+        //   'https://v2.fogcloud.io/enduser/getVerCode/', 
+        //   { 
+        //     method: 'POST', 
+        //     body: {
+        //       "loginname":"88635653@qq.com",
+        //       "appid":"db456b4a-17fc-11e6-a739-00163e0204c0"
+        //     },
+        //     headers:{
+        //       "Content-Type": "application/json"
+        //     }
+        //   })
+        // .then(function(res) {
+        //   console.log("res 1:"+JSON.stringify(res));
+        // })
+        // .then(function(json){
+        //   console.log("json 2:"+JSON.stringify(json));
+        // });
       }
-    }
+    },
+    events: {
+      customtype1: function (e) {
+        console.log(e.type, e.detail)
+      }
+    },
+    // created: function() {
+    //   var useLocal = true; // false when releasing
+    //   var host = '//localhost:12580';
+    //   var matches = /\/\/([^\/]+?)\//.exec(this.$getConfig().bundleUrl);
+    //   if (matches && matches.length >= 2) {
+    //     host = matches[1];
+    //   }
+    //   var localBase = '//' + host + '/test/build/';
+    //   var nativeBase = '';
+    //   var h5Base = './index.html?page=./test/build/';
+
+    //   // in native
+    //   var base = useLocal ? localBase : nativeBase;
+    //   // in browser or WebView
+    //   if (typeof window === 'object') {
+    //     base = h5Base;
+    //   }
+
+    //   for (var i in this.cases) {
+    //     var ca = this.cases[i];
+    //     ca.url = base + ca.name + '.js';
+    //   }
+    //   //nativeLog('hit', this.cases[0].url);
+    // }
   }
 </script>
+
+<style>
+  .div-box{
+    padding: 8px;
+    background-color: #ffffff;
+    margin-bottom: 10px;
+  }
+/*  .title{
+    font-size: 16px;
+    color: #00ff00;
+    padding: 8px;
+    font-weight: bold;
+  }*/
+  .buttonclick{
+    background-color: #666;
+    color: #fff;
+    padding: 8px;
+  }
+  .male{
+    color: red;
+  }
+  .female{
+    color: blue;
+  }
+
+  .img {width: 150; height: 150;}
+  .title {flex: 1; color: #0000ff; font-size: 30; font-weight: bold; background-color: #f6f7f8;}
+  .slider {
+    flex-direction: row;
+    margin: 18;
+    width: 714;
+    height: 230;
+  }
+  .slider-pages {
+    flex-direction: row;
+    width: 714;
+    height: 200;
+  }
+  .indicator {
+    width:714;
+    height:200;
+    position:absolute;
+    top:1;
+    left:1;
+    item-color: red;
+    item-selectedColor: blue;
+    item-size: 20;
+  }
+</style>

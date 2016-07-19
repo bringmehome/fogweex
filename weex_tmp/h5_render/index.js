@@ -94,14 +94,25 @@
 	})
 	});
 
-	;__weex_define__("@weex-component/657269a487048274e483b65d456830b5", [], function(__weex_require__, __weex_exports__, __weex_module__){
+	;__weex_define__("@weex-component/5fb156cb57a9294c7171f8d2d9e6ff67", [], function(__weex_require__, __weex_exports__, __weex_module__){
 	__webpack_require__(1);
 
 	;
-
+	  // TODO ontouch highlight
 	  __weex_module__.exports = {
 	    data: function () {return {
-	      firstName: 'John',
+	      cases: [
+	        {name: 'test', title: 'Test', url: ''},
+	        {name: 'test', title: 'Test', url: ''},
+	        {name: 'test', title: 'Test', url: ''},
+	        {name: 'test', title: 'Test', url: ''},
+	        {name: 'test', title: 'Test', url: ''},
+	        {name: 'test', title: 'Test', url: ''},
+	        {name: 'test', title: 'Test', url: ''},
+	        {name: 'test', title: 'Test', url: ''},
+	        {name: 'test', title: 'Test', url: ''}
+	      ],
+	       firstName: 'John',
 	      lastName: 'Smith',
 	      tag:true,
 	      imgsrc:"http://business.cdn.qianqian.com/qianqian/pic/bos_client_abf5b611e9b66a24887942babb050afc.jpg",
@@ -123,15 +134,31 @@
 	        {imgId: 103, imgUrl: "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"}
 	      ],
 	      title:null,
-	      myid:45
+	      myid:45,
+	      w:750,
+	      h:200,
+	     itemList: [
+	        {itemId: '520421163634', title: 'item1', pictureUrl: 'https://gd2.alicdn.com/bao/uploaded/i2/T14H1LFwBcXXXXXXXX_!!0-item_pic.jpg'},
+	        {itemId: '522076777462', title: 'item2', pictureUrl: 'https://gd1.alicdn.com/bao/uploaded/i1/TB1PXJCJFXXXXciXFXXXXXXXXXX_!!0-item_pic.jpg'},
+	        {itemId: '522076777462', title: 'iten3', pictureUrl: 'https://gd3.alicdn.com/bao/uploaded/i3/TB1x6hYLXXXXXazXVXXXXXXXXXX_!!0-item_pic.jpg'}
+	      ]
 	    }},
+	    // init: 在视图模型的构造函数开始调用时激活；
+	    // created: 当视图模型监听默认数据，但还未编译模板时激活；
+	    // ready: 当视图模型监听默认数据并且编译模板生成虚拟DOM后被激活。
+	    init: function () {
+	      console.log('ViewModel constructor begins')
+	    },
+	    ready: function () {
+	      console.log('Virtual DOM finished')
+	    },
 	    created: function () {
+	      console.log('Data observation finished')
 	      this.$on('notify', function(e) {
 	        //  when <foo> image tag  be clicked ,the function will be executing.
 	        // e.detail is  `{a: 1}`
 	        console.log("e", e.detail);
 	      });
-
 	    },
 	    computed: {
 	      fullName: {
@@ -147,6 +174,9 @@
 	      }
 	    },
 	    methods: {
+	      change: function (e) {
+
+	      },
 	      changeName: function() {
 	        if(this.tag){
 	          this.fullName = 'Terry King';
@@ -179,102 +209,405 @@
 
 	        var ret = _.extend(obj1, obj2, obj3)
 	        console.log(JSON.stringify(ret));
+	      },
+	      update: function (e) {
+	        this.h += 200
+	      },
+	      error:function(){
+
+	      },
+	      stremobj:function(){
+	        var arg1 = 'I am alert!'
+	        var arg2 = 'I am ok'
+	        var arg3 = 'I am cancel'
+	        var modal = __weex_require__('@weex-module/modal');
+	        modal.confirm({
+	          message: arg1,
+	          okTitle: arg2,
+	          cancelTitle: arg3
+	        }, function(result) {
+	          nativeLog(result)
+	          // TODO after the confirm is complete.
+	        });
+	      },
+	      fetchFunc:function(){
+	        console.log("stream");
+	        var stream = __weex_require__('@weex-module/stream');
+	        stream.fetch({
+	          method: 'POST',
+	          url: 'https://v2.fogcloud.io/enduser/getVerCode/',
+	          type:'json',
+	          body: {
+	            "loginname":"88635653@qq.com",
+	            "appid":"db456b4a-17fc-11e6-a739-00163e0204c0"
+	          }   
+	        }, function(response) {
+	          console.log("res 1:"+JSON.stringify(response));
+	          //process response
+	        },function(response){
+	          console.log("bytes received:"+response.length);
+	        });
+
+
+
+	        // fetch(
+	        //   'http://httpbin.org/post', 
+	        //   { 
+	        //     method: 'POST', 
+	        //     body: 'a=1' 
+	        //   })
+	        // .then(function(res) {
+	        //   console.log("res 1:"+JSON.stringify(res));
+	        // })
+	        // .then(function(json){
+	        //   console.log("json 2:"+JSON.stringify(json));
+	        // });
+
+
+	        // fetch(
+	        //   'https://v2.fogcloud.io/enduser/getVerCode/', 
+	        //   { 
+	        //     method: 'POST', 
+	        //     body: {
+	        //       "loginname":"88635653@qq.com",
+	        //       "appid":"db456b4a-17fc-11e6-a739-00163e0204c0"
+	        //     },
+	        //     headers:{
+	        //       "Content-Type": "application/json"
+	        //     }
+	        //   })
+	        // .then(function(res) {
+	        //   console.log("res 1:"+JSON.stringify(res));
+	        // })
+	        // .then(function(json){
+	        //   console.log("json 2:"+JSON.stringify(json));
+	        // });
 	      }
-	    }
+	    },
+	    events: {
+	      customtype1: function (e) {
+	        console.log(e.type, e.detail)
+	      }
+	    },
+	    // created: function() {
+	    //   var useLocal = true; // false when releasing
+	    //   var host = '//localhost:12580';
+	    //   var matches = /\/\/([^\/]+?)\//.exec(this.$getConfig().bundleUrl);
+	    //   if (matches && matches.length >= 2) {
+	    //     host = matches[1];
+	    //   }
+	    //   var localBase = '//' + host + '/test/build/';
+	    //   var nativeBase = '';
+	    //   var h5Base = './index.html?page=./test/build/';
+
+	    //   // in native
+	    //   var base = useLocal ? localBase : nativeBase;
+	    //   // in browser or WebView
+	    //   if (typeof window === 'object') {
+	    //     base = h5Base;
+	    //   }
+
+	    //   for (var i in this.cases) {
+	    //     var ca = this.cases[i];
+	    //     ca.url = base + ca.name + '.js';
+	    //   }
+	    //   //nativeLog('hit', this.cases[0].url);
+	    // }
 	  }
 
 	;__weex_module__.exports.template = __weex_module__.exports.template || {}
 	;Object.assign(__weex_module__.exports.template, {
-	  "type": "container",
-	  "style": {
-	    "backgroundColor": "#e6e7e8"
-	  },
+	  "type": "scroller",
 	  "children": [
 	    {
 	      "type": "container",
-	      "classList": [
-	        "div-box"
-	      ],
+	      "style": {
+	        "backgroundColor": "#e6e7e8"
+	      },
 	      "children": [
 	        {
-	          "type": "text",
-	          "classList": [
-	            "title"
-	          ],
-	          "attr": {
-	            "value": "这里有以下接口：if, onclick, get, set, img src"
-	          }
-	        },
-	        {
-	          "type": "image",
-	          "style": {
-	            "width": 150,
-	            "height": 80
-	          },
-	          "attr": {
-	            "src": function () {return this.imgsrc}
-	          },
-	          "shown": function () {return this.tag}
-	        },
-	        {
-	          "type": "text",
-	          "attr": {
-	            "value": function () {return this.fullName}
-	          }
-	        },
-	        {
-	          "type": "text",
-	          "shown": function () {return this.tag},
-	          "attr": {
-	            "value": "Hello tag"
-	          }
-	        },
-	        {
-	          "type": "text",
-	          "shown": function () {return this.tag},
-	          "attr": {
-	            "value": "Hello {{}} tag"
-	          }
-	        },
-	        {
-	          "type": "text",
-	          "classList": [
-	            "buttonclick"
-	          ],
-	          "events": {
-	            "click": "changeName"
-	          },
-	          "attr": {
-	            "value": "改名字"
-	          }
-	        }
-	      ]
-	    },
-	    {
-	      "type": "container",
-	      "classList": [
-	        "div-box"
-	      ],
-	      "children": [
-	        {
-	          "type": "text",
-	          "classList": [
-	            "title"
-	          ],
-	          "attr": {
-	            "value": "列表显示"
-	          }
+	          "type": "container",
+	          "children": [
+	            {
+	              "type": "text",
+	              "classList": [
+	                "buttonclick"
+	              ],
+	              "events": {
+	                "click": "stremobj"
+	              },
+	              "attr": {
+	                "value": "POST"
+	              }
+	            },
+	            {
+	              "type": "text",
+	              "classList": [
+	                "buttonclick"
+	              ],
+	              "events": {
+	                "click": "fetchFunc"
+	              },
+	              "attr": {
+	                "value": "Fetch"
+	              }
+	            }
+	          ]
 	        },
 	        {
 	          "type": "container",
-	          "repeat": function () {return this.list},
-	          "classList": function () {return [this.gender]},
 	          "children": [
+	            {
+	              "type": "text",
+	              "classList": [
+	                "title"
+	              ],
+	              "attr": {
+	                "value": "slider"
+	              }
+	            },
+	            {
+	              "type": "div",
+	              "children": [
+	                {
+	                  "type": "slider",
+	                  "classList": [
+	                    "slider"
+	                  ],
+	                  "children": [
+	                    {
+	                      "type": "div",
+	                      "classList": [
+	                        "slider-pages"
+	                      ],
+	                      "repeat": function () {return this.itemList},
+	                      "children": [
+	                        {
+	                          "type": "image",
+	                          "classList": [
+	                            "img"
+	                          ],
+	                          "attr": {
+	                            "src": function () {return this.pictureUrl}
+	                          }
+	                        },
+	                        {
+	                          "type": "text",
+	                          "classList": [
+	                            "title"
+	                          ],
+	                          "attr": {
+	                            "value": function () {return this.title}
+	                          }
+	                        }
+	                      ]
+	                    },
+	                    {
+	                      "type": "indicator",
+	                      "classList": [
+	                        "indicator"
+	                      ]
+	                    }
+	                  ]
+	                }
+	              ]
+	            }
+	          ]
+	        },
+	        {
+	          "type": "container",
+	          "children": [
+	            {
+	              "type": "div",
+	              "style": {
+	                "width": function () {return this.w},
+	                "height": function () {return this.h},
+	                "backgroundColor": "#FF0000"
+	              },
+	              "events": {
+	                "click": "update"
+	              }
+	            }
+	          ]
+	        },
+	        {
+	          "type": "container",
+	          "classList": [
+	            "div-box"
+	          ],
+	          "children": [
+	            {
+	              "type": "text",
+	              "classList": [
+	                "title"
+	              ],
+	              "attr": {
+	                "value": "richtext"
+	              }
+	            },
+	            {
+	              "type": "richtext",
+	              "attr": {
+	                "tel": "13122556653"
+	              },
+	              "style": {
+	                "width": 200,
+	                "height": 100
+	              }
+	            }
+	          ]
+	        },
+	        {
+	          "type": "container",
+	          "classList": [
+	            "div-box"
+	          ],
+	          "children": [
+	            {
+	              "type": "text",
+	              "classList": [
+	                "title"
+	              ],
+	              "attr": {
+	                "value": "这里有以下接口：if, onclick, get, set, img src"
+	              }
+	            },
+	            {
+	              "type": "image",
+	              "style": {
+	                "width": 150,
+	                "height": 80
+	              },
+	              "attr": {
+	                "src": function () {return this.imgsrc}
+	              },
+	              "shown": function () {return this.tag}
+	            },
+	            {
+	              "type": "text",
+	              "attr": {
+	                "value": function () {return this.fullName}
+	              }
+	            },
+	            {
+	              "type": "text",
+	              "shown": function () {return this.tag},
+	              "attr": {
+	                "value": "Hello tag"
+	              }
+	            },
+	            {
+	              "type": "text",
+	              "shown": function () {return this.tag},
+	              "attr": {
+	                "value": "Hello {{}} tag"
+	              }
+	            },
+	            {
+	              "type": "text",
+	              "classList": [
+	                "buttonclick"
+	              ],
+	              "events": {
+	                "click": "changeName"
+	              },
+	              "attr": {
+	                "value": "改名字"
+	              }
+	            }
+	          ]
+	        },
+	        {
+	          "type": "container",
+	          "classList": [
+	            "div-box"
+	          ],
+	          "children": [
+	            {
+	              "type": "text",
+	              "classList": [
+	                "title"
+	              ],
+	              "attr": {
+	                "value": "列表显示"
+	              }
+	            },
+	            {
+	              "type": "container",
+	              "repeat": function () {return this.list},
+	              "classList": function () {return [this.gender]},
+	              "children": [
+	                {
+	                  "type": "image",
+	                  "attr": {
+	                    "src": function () {return this.avatar}
+	                  },
+	                  "style": {
+	                    "width": 50,
+	                    "height": 50
+	                  }
+	                },
+	                {
+	                  "type": "text",
+	                  "attr": {
+	                    "value": function () {return 'No.' + (this.$index+1) + ' : ' + (this.nickname) + ' - ' + (this.group)}
+	                  }
+	                },
+	                {
+	                  "type": "text",
+	                  "attr": {
+	                    "value": function () {return this.title}
+	                  }
+	                }
+	              ]
+	            }
+	          ]
+	        },
+	        {
+	          "type": "container",
+	          "classList": [
+	            "div-box"
+	          ],
+	          "children": [
+	            {
+	              "type": "text",
+	              "classList": [
+	                "title"
+	              ],
+	              "attr": {
+	                "value": "关联其他的.we文件"
+	              }
+	            },
+	            {
+	              "type": "foo-list",
+	              "attr": {
+	                "list": function () {return this.foolist}
+	              }
+	            }
+	          ]
+	        },
+	        {
+	          "type": "container",
+	          "children": [
+	            {
+	              "type": "text",
+	              "classList": [
+	                "title"
+	              ],
+	              "attr": {
+	                "value": "自定义tpid"
+	              }
+	            },
 	            {
 	              "type": "image",
 	              "attr": {
-	                "src": function () {return this.avatar}
+	                "tpid": function () {return this.imgId},
+	                "src": function () {return this.imgUrl}
 	              },
+	              "events": {
+	                "click": "getImageId"
+	              },
+	              "repeat": function () {return this.images},
 	              "style": {
 	                "width": 50,
 	                "height": 50
@@ -283,159 +616,95 @@
 	            {
 	              "type": "text",
 	              "attr": {
-	                "value": function () {return 'No.' + (this.$index+1) + ' : ' + (this.nickname) + ' - ' + (this.group)}
+	                "value": function () {return this.myid}
+	              }
+	            }
+	          ]
+	        },
+	        {
+	          "type": "container",
+	          "classList": [
+	            "div-box"
+	          ],
+	          "children": [
+	            {
+	              "type": "text",
+	              "classList": [
+	                "title"
+	              ],
+	              "attr": {
+	                "value": "dispatch:子模块往父亲模块发送消息，broadcast：父亲模块往子模块发送消息"
+	              }
+	            },
+	            {
+	              "type": "foos",
+	              "attr": {
+	                "title": "fooimg",
+	                "imageUrl": "http://business.cdn.qianqian.com/qianqian/pic/bos_client_abf5b611e9b66a24887942babb050afc.jpg"
 	              }
 	            },
 	            {
 	              "type": "text",
+	              "events": {
+	                "click": "changeTitle"
+	              },
 	              "attr": {
-	                "value": function () {return this.title}
+	                "value": "往子模块发送"
 	              }
 	            }
 	          ]
-	        }
-	      ]
-	    },
-	    {
-	      "type": "container",
-	      "classList": [
-	        "div-box"
-	      ],
-	      "children": [
+	        },
 	        {
-	          "type": "text",
+	          "type": "container",
 	          "classList": [
-	            "title"
+	            "div-box"
 	          ],
-	          "attr": {
-	            "value": "关联其他的.we文件"
-	          }
+	          "children": [
+	            {
+	              "type": "text",
+	              "classList": [
+	                "title"
+	              ],
+	              "attr": {
+	                "value": "调用自定义模块"
+	              }
+	            },
+	            {
+	              "type": "text",
+	              "events": {
+	                "click": "myUrl"
+	              },
+	              "attr": {
+	                "value": "调用myUrl"
+	              }
+	            }
+	          ]
 	        },
 	        {
-	          "type": "foo-list",
-	          "attr": {
-	            "list": function () {return this.foolist}
-	          }
-	        }
-	      ]
-	    },
-	    {
-	      "type": "container",
-	      "children": [
-	        {
-	          "type": "text",
+	          "type": "container",
 	          "classList": [
-	            "title"
+	            "div-box"
 	          ],
-	          "attr": {
-	            "value": "自定义tpid"
-	          }
-	        },
-	        {
-	          "type": "image",
-	          "attr": {
-	            "tpid": function () {return this.imgId},
-	            "src": function () {return this.imgUrl}
-	          },
-	          "events": {
-	            "click": "getImageId"
-	          },
-	          "repeat": function () {return this.images},
-	          "style": {
-	            "width": 50,
-	            "height": 50
-	          }
-	        },
-	        {
-	          "type": "text",
-	          "attr": {
-	            "value": function () {return this.myid}
-	          }
-	        }
-	      ]
-	    },
-	    {
-	      "type": "container",
-	      "classList": [
-	        "div-box"
-	      ],
-	      "children": [
-	        {
-	          "type": "text",
-	          "classList": [
-	            "title"
-	          ],
-	          "attr": {
-	            "value": "dispatch:子模块往父亲模块发送消息，broadcast：父亲模块往子模块发送消息"
-	          }
-	        },
-	        {
-	          "type": "foos",
-	          "attr": {
-	            "title": "fooimg",
-	            "imageUrl": "http://business.cdn.qianqian.com/qianqian/pic/bos_client_abf5b611e9b66a24887942babb050afc.jpg"
-	          }
-	        },
-	        {
-	          "type": "text",
-	          "events": {
-	            "click": "changeTitle"
-	          },
-	          "attr": {
-	            "value": "往子模块发送"
-	          }
-	        }
-	      ]
-	    },
-	    {
-	      "type": "container",
-	      "classList": [
-	        "div-box"
-	      ],
-	      "children": [
-	        {
-	          "type": "text",
-	          "classList": [
-	            "title"
-	          ],
-	          "attr": {
-	            "value": "调用自定义模块"
-	          }
-	        },
-	        {
-	          "type": "text",
-	          "events": {
-	            "click": "myUrl"
-	          },
-	          "attr": {
-	            "value": "调用myUrl"
-	          }
-	        }
-	      ]
-	    },
-	    {
-	      "type": "container",
-	      "classList": [
-	        "div-box"
-	      ],
-	      "children": [
-	        {
-	          "type": "text",
-	          "classList": [
-	            "title"
-	          ],
-	          "attr": {
-	            "value": "使用第三方模块"
-	          }
-	        },
-	        {
-	          "type": "text",
-	          "events": {
-	            "click": "require3rd"
-	          },
-	          "attr": {
-	            "value": "使用第三方模块"
-	          }
+	          "children": [
+	            {
+	              "type": "text",
+	              "classList": [
+	                "title"
+	              ],
+	              "attr": {
+	                "value": "使用第三方模块"
+	              }
+	            },
+	            {
+	              "type": "text",
+	              "events": {
+	                "click": "require3rd"
+	              },
+	              "attr": {
+	                "value": "使用第三方模块"
+	              }
+	            }
+	          ]
 	        }
 	      ]
 	    }
@@ -448,12 +717,6 @@
 	    "backgroundColor": "#ffffff",
 	    "marginBottom": 10
 	  },
-	  "title": {
-	    "fontSize": 16,
-	    "color": "#00ff00",
-	    "padding": 8,
-	    "fontWeight": "bold"
-	  },
 	  "buttonclick": {
 	    "backgroundColor": "#666666",
 	    "color": "#ffffff",
@@ -464,10 +727,42 @@
 	  },
 	  "female": {
 	    "color": "#0000FF"
+	  },
+	  "img": {
+	    "width": 150,
+	    "height": 150
+	  },
+	  "title": {
+	    "flex": 1,
+	    "color": "#0000ff",
+	    "fontSize": 30,
+	    "fontWeight": "bold",
+	    "backgroundColor": "#f6f7f8"
+	  },
+	  "slider": {
+	    "flexDirection": "row",
+	    "margin": 18,
+	    "width": 714,
+	    "height": 230
+	  },
+	  "slider-pages": {
+	    "flexDirection": "row",
+	    "width": 714,
+	    "height": 200
+	  },
+	  "indicator": {
+	    "width": 714,
+	    "height": 200,
+	    "position": "absolute",
+	    "top": 1,
+	    "left": 1,
+	    "itemColor": "red",
+	    "itemSelectedColor": "blue",
+	    "itemSize": 20
 	  }
 	})
 	})
-	;__weex_bootstrap__("@weex-component/657269a487048274e483b65d456830b5", {
+	;__weex_bootstrap__("@weex-component/5fb156cb57a9294c7171f8d2d9e6ff67", {
 	  "transformerVersion": "0.3.1"
 	},undefined)
 
