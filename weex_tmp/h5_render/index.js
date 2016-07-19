@@ -94,7 +94,7 @@
 	})
 	});
 
-	;__weex_define__("@weex-component/5fb156cb57a9294c7171f8d2d9e6ff67", [], function(__weex_require__, __weex_exports__, __weex_module__){
+	;__weex_define__("@weex-component/11b103d4267d93a3c346503cd3d10e57", [], function(__weex_require__, __weex_exports__, __weex_module__){
 	__webpack_require__(1);
 
 	;
@@ -235,12 +235,23 @@
 	        var stream = __weex_require__('@weex-module/stream');
 	        stream.fetch({
 	          method: 'POST',
+	          // url: 'http://192.168.3.186:8001/enduser/getVerCode/',
 	          url: 'https://v2.fogcloud.io/enduser/getVerCode/',
 	          type:'json',
 	          body: {
-	            "loginname":"88635653@qq.com",
-	            "appid":"db456b4a-17fc-11e6-a739-00163e0204c0"
-	          }   
+	            loginname:"88635653@qq.com",
+	            // appid:"a94def5e-41b2-11e6-a4ef-f8cab81d2727"
+	            appid:"db456b4a-17fc-11e6-a739-00163e0204c0"
+	          },
+	          headers:{
+	            "Content-Type": "application/json"
+	          }
+
+	          // body: {
+	          //   loginname:"88635653@qq.com",
+	          //   appid:"a94def5e-41b2-11e6-a4ef-f8cab81d2727"
+	          //   // appid:"db456b4a-17fc-11e6-a739-00163e0204c0"
+	          // }
 	        }, function(response) {
 	          console.log("res 1:"+JSON.stringify(response));
 	          //process response
@@ -248,40 +259,37 @@
 	          console.log("bytes received:"+response.length);
 	        });
 
-
-
-	        // fetch(
-	        //   'http://httpbin.org/post', 
-	        //   { 
-	        //     method: 'POST', 
-	        //     body: 'a=1' 
-	        //   })
-	        // .then(function(res) {
-	        //   console.log("res 1:"+JSON.stringify(res));
-	        // })
-	        // .then(function(json){
-	        //   console.log("json 2:"+JSON.stringify(json));
+	        // stream.fetch({
+	        //   method: 'POST',
+	        //   url: 'http://www.easylink.io/v1/user/login',
+	        //   type:'json',
+	        //   body: {
+	        //     login_id:"13122112211",
+	        //     password:"123456"
+	        //   },
+	        //   headers:{
+	        //     "X-Application-Id":"7ffbec46-7ff9-46fc-bb55-ec1dda89f40c"
+	        //   }
+	        // }, function(response) {
+	        //   console.log("res 1:"+JSON.stringify(response));
+	        //   //process response
+	        // },function(response){
+	        //   console.log("bytes received:"+response.length);
 	        // });
 
-
-	        // fetch(
-	        //   'https://v2.fogcloud.io/enduser/getVerCode/', 
-	        //   { 
-	        //     method: 'POST', 
-	        //     body: {
-	        //       "loginname":"88635653@qq.com",
-	        //       "appid":"db456b4a-17fc-11e6-a739-00163e0204c0"
-	        //     },
-	        //     headers:{
-	        //       "Content-Type": "application/json"
-	        //     }
-	        //   })
-	        // .then(function(res) {
-	        //   console.log("res 1:"+JSON.stringify(res));
-	        // })
-	        // .then(function(json){
-	        //   console.log("json 2:"+JSON.stringify(json));
+	        // stream.fetch({
+	        //   method: 'POST',
+	        //   url: "http://httpbin.org/post",
+	        //   type:'json',
+	        //   body: {
+	        //     a:1
+	        //   }
+	        // }, function(response) {
+	        //   console.log("res response", JSON.stringify(response));
+	        // },function(json){
+	        //   console.log("res json", JSON.stringify(json));
 	        // });
+
 	      }
 	    },
 	    events: {
@@ -762,7 +770,7 @@
 	  }
 	})
 	})
-	;__weex_bootstrap__("@weex-component/5fb156cb57a9294c7171f8d2d9e6ff67", {
+	;__weex_bootstrap__("@weex-component/11b103d4267d93a3c346503cd3d10e57", {
 	  "transformerVersion": "0.3.1"
 	},undefined)
 
