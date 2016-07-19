@@ -267,18 +267,13 @@
             // appid:"a94def5e-41b2-11e6-a4ef-f8cab81d2727"
             appid:"db456b4a-17fc-11e6-a739-00163e0204c0"
           },
+          //android端会默认多了一个Content-Type: application/x-www-form-urlencoded
+          //所以这里需要添加 "Content-Type": "application/json"，但是添加后HTML服务器端收到body为空
           headers:{
             "Content-Type": "application/json"
           }
-
-          // body: {
-          //   loginname:"88635653@qq.com",
-          //   appid:"a94def5e-41b2-11e6-a4ef-f8cab81d2727"
-          //   // appid:"db456b4a-17fc-11e6-a739-00163e0204c0"
-          // }
         }, function(response) {
           console.log("res 1:"+JSON.stringify(response));
-          //process response
         },function(response){
           console.log("bytes received:"+response.length);
         });

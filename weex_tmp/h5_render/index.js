@@ -94,7 +94,7 @@
 	})
 	});
 
-	;__weex_define__("@weex-component/11b103d4267d93a3c346503cd3d10e57", [], function(__weex_require__, __weex_exports__, __weex_module__){
+	;__weex_define__("@weex-component/4124a2f3bbc64ec4a0866f0b16fbc760", [], function(__weex_require__, __weex_exports__, __weex_module__){
 	__webpack_require__(1);
 
 	;
@@ -243,18 +243,13 @@
 	            // appid:"a94def5e-41b2-11e6-a4ef-f8cab81d2727"
 	            appid:"db456b4a-17fc-11e6-a739-00163e0204c0"
 	          },
+	          //android端会默认多了一个Content-Type: application/x-www-form-urlencoded
+	          //所以这里需要添加 "Content-Type": "application/json"，但是添加后HTML服务器端收到body为空
 	          headers:{
 	            "Content-Type": "application/json"
 	          }
-
-	          // body: {
-	          //   loginname:"88635653@qq.com",
-	          //   appid:"a94def5e-41b2-11e6-a4ef-f8cab81d2727"
-	          //   // appid:"db456b4a-17fc-11e6-a739-00163e0204c0"
-	          // }
 	        }, function(response) {
 	          console.log("res 1:"+JSON.stringify(response));
-	          //process response
 	        },function(response){
 	          console.log("bytes received:"+response.length);
 	        });
@@ -770,7 +765,7 @@
 	  }
 	})
 	})
-	;__weex_bootstrap__("@weex-component/11b103d4267d93a3c346503cd3d10e57", {
+	;__weex_bootstrap__("@weex-component/4124a2f3bbc64ec4a0866f0b16fbc760", {
 	  "transformerVersion": "0.3.1"
 	},undefined)
 
