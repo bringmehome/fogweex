@@ -94,7 +94,7 @@
 	})
 	});
 
-	;__weex_define__("@weex-component/4124a2f3bbc64ec4a0866f0b16fbc760", [], function(__weex_require__, __weex_exports__, __weex_module__){
+	;__weex_define__("@weex-component/917346484da485bc3bf6eb768a29a64c", [], function(__weex_require__, __weex_exports__, __weex_module__){
 	__webpack_require__(1);
 
 	;
@@ -235,18 +235,19 @@
 	        var stream = __weex_require__('@weex-module/stream');
 	        stream.fetch({
 	          method: 'POST',
-	          // url: 'http://192.168.3.186:8001/enduser/getVerCode/',
-	          url: 'https://v2.fogcloud.io/enduser/getVerCode/',
+	          url: 'http://192.168.3.186:8000/enduser/getVerCode/',
+	          // url: 'https://v2.fogcloud.io/enduser/getVerCode/',
 	          type:'json',
-	          body: {
+	          body: JSON.stringify({
 	            loginname:"88635653@qq.com",
-	            // appid:"a94def5e-41b2-11e6-a4ef-f8cab81d2727"
-	            appid:"db456b4a-17fc-11e6-a739-00163e0204c0"
-	          },
+	            appid:"a94def5e-41b2-11e6-a4ef-f8cab81d2727"
+	            // appid:"db456b4a-17fc-11e6-a739-00163e0204c0"
+	          }),
 	          //android端会默认多了一个Content-Type: application/x-www-form-urlencoded
 	          //所以这里需要添加 "Content-Type": "application/json"，但是添加后HTML服务器端收到body为空
+	          //发送的json变为JSONString，则可以解决这个问题
 	          headers:{
-	            "Content-Type": "application/json"
+	            "Content-Type":"application/json"
 	          }
 	        }, function(response) {
 	          console.log("res 1:"+JSON.stringify(response));
@@ -765,7 +766,7 @@
 	  }
 	})
 	})
-	;__weex_bootstrap__("@weex-component/4124a2f3bbc64ec4a0866f0b16fbc760", {
+	;__weex_bootstrap__("@weex-component/917346484da485bc3bf6eb768a29a64c", {
 	  "transformerVersion": "0.3.1"
 	},undefined)
 
