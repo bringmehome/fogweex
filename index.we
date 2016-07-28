@@ -16,8 +16,8 @@
   <scroller>
     <container style="background-color: #e6e7e8;">
       <container>
-      <text class="buttonclick" onclick="stremobj">POST</text>
-      <text class="buttonclick" onclick="fetchFunc">Fetch</text>
+      <text class="buttonclick" onclick="stremobj">斯特</text>
+      <text class="buttonclick" onclick="fetchFunc">飞驰</text>
       </container>
 
      <!--  <container>
@@ -89,6 +89,10 @@
       <container class="div-box">
         <text class="title">使用第三方模块</text>
         <text onclick="require3rd">使用第三方模块</text>
+      </container>      
+      <container class="div-box">
+        <text class="title">使用easylink模块</text>
+        <text onclick="easylink">EasyLink</text>
       </container>
     </container>
   </scroller>
@@ -224,6 +228,19 @@
         URLHelper.openURL("http://www.taobao.com",function(ts){
             console.log("url is open at ----- >>>>>  "+ts);
         });
+      },      
+      easylink:function(){
+        var fog = require('@weex-module/fog');//same as you registered
+        fog.startEasyLink({
+          ssid:"feeling",
+          password:"14",
+          worktime:60000,
+          sleeptime:100,
+          extradata:"hi",
+          rc4key:""
+        },function(ts){
+            console.log(" js fog ----- ", JSON.stringify(ts));
+        });
       },
       require3rd:function(){
         var _ = require('underscore');
@@ -259,13 +276,13 @@
         var stream = require('@weex-module/stream');
         stream.fetch({
           method: 'POST',
-          url: 'http://192.168.3.186:8000/enduser/getVerCode/',
-          // url: 'https://v2.fogcloud.io/enduser/getVerCode/',
+          // url: 'http://192.168.3.186:8000/enduser/getVerCode/',
+          url: 'https://v2.fogcloud.io/enduser/getVerCode/',
           type:'json',
           body: JSON.stringify({
             loginname:"88635653@qq.com",
-            appid:"a94def5e-41b2-11e6-a4ef-f8cab81d2727"
-            // appid:"db456b4a-17fc-11e6-a739-00163e0204c0"
+            // appid:"a94def5e-41b2-11e6-a4ef-f8cab81d2727"
+            appid:"db456b4a-17fc-11e6-a739-00163e0204c0"
           }),
           //android端会默认多了一个Content-Type: application/x-www-form-urlencoded
           //所以这里需要添加 "Content-Type": "application/json"，但是添加后HTML服务器端收到body为空

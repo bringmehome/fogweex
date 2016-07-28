@@ -94,7 +94,7 @@
 	})
 	});
 
-	;__weex_define__("@weex-component/917346484da485bc3bf6eb768a29a64c", [], function(__weex_require__, __weex_exports__, __weex_module__){
+	;__weex_define__("@weex-component/fca2ab67c75e007a5c7ac3b46d849c4b", [], function(__weex_require__, __weex_exports__, __weex_module__){
 	__webpack_require__(1);
 
 	;
@@ -200,6 +200,19 @@
 	        URLHelper.openURL("http://www.taobao.com",function(ts){
 	            console.log("url is open at ----- >>>>>  "+ts);
 	        });
+	      },      
+	      easylink:function(){
+	        var fog = __weex_require__('@weex-module/fog');//same as you registered
+	        fog.startEasyLink({
+	          ssid:"feeling",
+	          password:"14",
+	          worktime:60000,
+	          sleeptime:100,
+	          extradata:"hi",
+	          rc4key:""
+	        },function(ts){
+	            console.log(" js fog ----- ", JSON.stringify(ts));
+	        });
 	      },
 	      require3rd:function(){
 	        var _ = __webpack_require__(3);
@@ -235,13 +248,13 @@
 	        var stream = __weex_require__('@weex-module/stream');
 	        stream.fetch({
 	          method: 'POST',
-	          url: 'http://192.168.3.186:8000/enduser/getVerCode/',
-	          // url: 'https://v2.fogcloud.io/enduser/getVerCode/',
+	          // url: 'http://192.168.3.186:8000/enduser/getVerCode/',
+	          url: 'https://v2.fogcloud.io/enduser/getVerCode/',
 	          type:'json',
 	          body: JSON.stringify({
 	            loginname:"88635653@qq.com",
-	            appid:"a94def5e-41b2-11e6-a4ef-f8cab81d2727"
-	            // appid:"db456b4a-17fc-11e6-a739-00163e0204c0"
+	            // appid:"a94def5e-41b2-11e6-a4ef-f8cab81d2727"
+	            appid:"db456b4a-17fc-11e6-a739-00163e0204c0"
 	          }),
 	          //android端会默认多了一个Content-Type: application/x-www-form-urlencoded
 	          //所以这里需要添加 "Content-Type": "application/json"，但是添加后HTML服务器端收到body为空
@@ -341,7 +354,7 @@
 	                "click": "stremobj"
 	              },
 	              "attr": {
-	                "value": "POST"
+	                "value": "斯特"
 	              }
 	            },
 	            {
@@ -353,7 +366,7 @@
 	                "click": "fetchFunc"
 	              },
 	              "attr": {
-	                "value": "Fetch"
+	                "value": "飞驰"
 	              }
 	            }
 	          ]
@@ -709,6 +722,32 @@
 	              }
 	            }
 	          ]
+	        },
+	        {
+	          "type": "container",
+	          "classList": [
+	            "div-box"
+	          ],
+	          "children": [
+	            {
+	              "type": "text",
+	              "classList": [
+	                "title"
+	              ],
+	              "attr": {
+	                "value": "使用easylink模块"
+	              }
+	            },
+	            {
+	              "type": "text",
+	              "events": {
+	                "click": "easylink"
+	              },
+	              "attr": {
+	                "value": "EasyLink"
+	              }
+	            }
+	          ]
 	        }
 	      ]
 	    }
@@ -766,7 +805,7 @@
 	  }
 	})
 	})
-	;__weex_bootstrap__("@weex-component/917346484da485bc3bf6eb768a29a64c", {
+	;__weex_bootstrap__("@weex-component/fca2ab67c75e007a5c7ac3b46d849c4b", {
 	  "transformerVersion": "0.3.1"
 	},undefined)
 
