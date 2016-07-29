@@ -94,7 +94,7 @@
 	})
 	});
 
-	;__weex_define__("@weex-component/fca2ab67c75e007a5c7ac3b46d849c4b", [], function(__weex_require__, __weex_exports__, __weex_module__){
+	;__weex_define__("@weex-component/d60bdf3149418ffc32cfe5f95e71e28b", [], function(__weex_require__, __weex_exports__, __weex_module__){
 	__webpack_require__(1);
 
 	;
@@ -205,13 +205,19 @@
 	        var fog = __weex_require__('@weex-module/fog');//same as you registered
 	        fog.startEasyLink({
 	          ssid:"feeling",
-	          password:"14",
-	          worktime:60000,
+	          password:"00000000",
+	          worktime:10000,
 	          sleeptime:100,
-	          extradata:"hi",
+	          extradata:"",
 	          rc4key:""
 	        },function(ts){
 	            console.log(" js fog ----- ", JSON.stringify(ts));
+	        });
+	      },
+	      mdnsfunction:function(){
+	        var fog = __weex_require__('@weex-module/fog');//same as you registered
+	        fog.startSearchDevices("",function(ret){
+	            console.log(" js fog ----- ", JSON.stringify(ret));
 	        });
 	      },
 	      require3rd:function(){
@@ -748,6 +754,32 @@
 	              }
 	            }
 	          ]
+	        },
+	        {
+	          "type": "container",
+	          "classList": [
+	            "div-box"
+	          ],
+	          "children": [
+	            {
+	              "type": "text",
+	              "classList": [
+	                "title"
+	              ],
+	              "attr": {
+	                "value": "使用MDNS模块"
+	              }
+	            },
+	            {
+	              "type": "text",
+	              "events": {
+	                "click": "mdnsfunction"
+	              },
+	              "attr": {
+	                "value": "MDNS"
+	              }
+	            }
+	          ]
 	        }
 	      ]
 	    }
@@ -805,7 +837,7 @@
 	  }
 	})
 	})
-	;__weex_bootstrap__("@weex-component/fca2ab67c75e007a5c7ac3b46d849c4b", {
+	;__weex_bootstrap__("@weex-component/d60bdf3149418ffc32cfe5f95e71e28b", {
 	  "transformerVersion": "0.3.1"
 	},undefined)
 

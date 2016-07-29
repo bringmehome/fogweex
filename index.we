@@ -93,6 +93,10 @@
       <container class="div-box">
         <text class="title">使用easylink模块</text>
         <text onclick="easylink">EasyLink</text>
+      </container>      
+      <container class="div-box">
+        <text class="title">使用MDNS模块</text>
+        <text onclick="mdnsfunction">MDNS</text>
       </container>
     </container>
   </scroller>
@@ -233,13 +237,19 @@
         var fog = require('@weex-module/fog');//same as you registered
         fog.startEasyLink({
           ssid:"feeling",
-          password:"14",
-          worktime:60000,
+          password:"00000000",
+          worktime:10000,
           sleeptime:100,
-          extradata:"hi",
+          extradata:"",
           rc4key:""
         },function(ts){
             console.log(" js fog ----- ", JSON.stringify(ts));
+        });
+      },
+      mdnsfunction:function(){
+        var fog = require('@weex-module/fog');//same as you registered
+        fog.startSearchDevices("",function(ret){
+            console.log(" js fog ----- ", JSON.stringify(ret));
         });
       },
       require3rd:function(){
