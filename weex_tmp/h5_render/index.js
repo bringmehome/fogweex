@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports) {
 
-	;__weex_define__("@weex-component/db75673081739c624df603db254ceccc", [], function(__weex_require__, __weex_exports__, __weex_module__){
+	;__weex_define__("@weex-component/9b3a3dc841e8873b89a7a2f9d0a3826f", [], function(__weex_require__, __weex_exports__, __weex_module__){
 
 	;
 	var fog;
@@ -70,11 +70,11 @@
 				  password:"00000000",
 				  worktime:60000,
 				  sleeptime:100,
-				  extradata:"wodo",
+				  extradata:"",
 				  rc4key:""
 				},function(ts){
 					// 提取message
-				    console.log(" ey fog startEasyLink----- ", JSON.stringify(ts.message));
+				    console.log(" ey fog startEasyLink----- ", JSON.stringify(ts));
 					// 将message字符串转为json
 				   	var message = JSON.parse(ts.message);
 					// 提取message中的message
@@ -99,7 +99,70 @@
 				fog.stopSearchDevices(function(ret){
 				    console.log(" mdns fog ----- ", JSON.stringify(ret));
 				});
-			},		
+			},	
+			startMqtt:function(){
+				fog = __weex_require__('@weex-module/fog');//same as you registered
+				console.log("fog", "start eas")
+				fog.startMqtt({
+				  host:"api.easylink.io",
+				  port:"1883",
+				  username:"admin",
+				  password:"admin",
+				  topic:"d64f517c/c8934691813c/out/read",
+				  clientid:"clientId-sin20160628",
+				  isencrypt:false
+				},function(ts){
+					// 提取message
+				    console.log(" fog only startMqtt----- ", JSON.stringify(ts));
+					// 将message字符串转为json
+				   	var message = JSON.parse(ts.message);
+					// 提取message中的message
+				    // console.log(" fog startMqtt----- ", JSON.stringify(message.payload), JSON.stringify(message.topic));
+				});
+			},
+			stopMqtt:function(){
+				fog = __weex_require__('@weex-module/fog');//same as you registered
+				fog.stopMqtt(function(ret){
+				    console.log(" fog startMqtt----- ", JSON.stringify(ret));
+				});
+			},
+			subscribe:function(){
+				fog = __weex_require__('@weex-module/fog');//same as you registered
+				fog.subscribe({
+					topic:"d64f517c/c8934691813c/in/write",
+					qos:0
+				},function(ret){
+				    console.log(" fog startMqtt----- ", JSON.stringify(ret));
+				});
+			},
+			unsubscribe:function(){
+				fog = __weex_require__('@weex-module/fog');//same as you registered
+				fog.unsubscribe({
+					topic:"d64f517c/c8934691813c/in/write"
+				},function(ret){
+				    console.log(" fog startMqtt----- ", JSON.stringify(ret));
+				});
+			},
+			publish:function(command){
+				fog = __weex_require__('@weex-module/fog');//same as you registered
+				fog.publish({
+					topic:"d64f517c/c8934691813c/in/write",
+					command:'{\"4\":' + command + '}'
+				},function(ret){
+				    console.log(" fog startMqtt----- ", JSON.stringify(ret));
+				});
+			},
+			fogTest:function(){
+				fog = __weex_require__('@weex-module/fog');//same as you registered
+				fog.fogTest({
+					name:"toe",
+					age:20,
+					height:168,
+					isma:false
+				},function(ret){
+				    console.log(" mdns fog ----- ", JSON.stringify(ret));
+				});
+			},	
 			stremobj:function(){
 		        var arg1 = 'I am alert!'
 		        var arg2 = 'I am ok'
@@ -305,6 +368,169 @@
 	          ]
 	        }
 	      ]
+	    },
+	    {
+	      "type": "div",
+	      "classList": [
+	        "div-box"
+	      ],
+	      "children": [
+	        {
+	          "type": "div",
+	          "classList": [
+	            "title"
+	          ],
+	          "children": [
+	            {
+	              "type": "text",
+	              "attr": {
+	                "value": "mDNS部分"
+	              }
+	            }
+	          ]
+	        },
+	        {
+	          "type": "div",
+	          "children": [
+	            {
+	              "type": "text",
+	              "classList": [
+	                "ey-start-btn"
+	              ],
+	              "events": {
+	                "click": "fogTest"
+	              },
+	              "attr": {
+	                "value": "fogTest"
+	              }
+	            }
+	          ]
+	        }
+	      ]
+	    },
+	    {
+	      "type": "div",
+	      "classList": [
+	        "div-box"
+	      ],
+	      "children": [
+	        {
+	          "type": "div",
+	          "classList": [
+	            "title"
+	          ],
+	          "children": [
+	            {
+	              "type": "text",
+	              "attr": {
+	                "value": "MQTT部分"
+	              }
+	            }
+	          ]
+	        },
+	        {
+	          "type": "div",
+	          "children": [
+	            {
+	              "type": "text",
+	              "classList": [
+	                "ey-start-btn"
+	              ],
+	              "events": {
+	                "click": "startMqtt"
+	              },
+	              "attr": {
+	                "value": "startMqtt"
+	              }
+	            }
+	          ]
+	        },
+	        {
+	          "type": "div",
+	          "children": [
+	            {
+	              "type": "text",
+	              "classList": [
+	                "ey-stop-btn"
+	              ],
+	              "events": {
+	                "click": "stopMqtt"
+	              },
+	              "attr": {
+	                "value": "stopMqtt"
+	              }
+	            }
+	          ]
+	        },
+	        {
+	          "type": "div",
+	          "children": [
+	            {
+	              "type": "text",
+	              "classList": [
+	                "ey-start-btn"
+	              ],
+	              "events": {
+	                "click": "subscribe"
+	              },
+	              "attr": {
+	                "value": "subscribe"
+	              }
+	            }
+	          ]
+	        },
+	        {
+	          "type": "div",
+	          "children": [
+	            {
+	              "type": "text",
+	              "classList": [
+	                "ey-stop-btn"
+	              ],
+	              "events": {
+	                "click": "unsubscribe"
+	              },
+	              "attr": {
+	                "value": "unsubscribe"
+	              }
+	            }
+	          ]
+	        },
+	        {
+	          "type": "div",
+	          "children": [
+	            {
+	              "type": "text",
+	              "classList": [
+	                "ey-start-btn"
+	              ],
+	              "events": {
+	                "click": function ($event) {this.publish(true,$event)}
+	              },
+	              "attr": {
+	                "value": "publish开"
+	              }
+	            }
+	          ]
+	        },
+	        {
+	          "type": "div",
+	          "children": [
+	            {
+	              "type": "text",
+	              "classList": [
+	                "ey-stop-btn"
+	              ],
+	              "events": {
+	                "click": function ($event) {this.publish(false,$event)}
+	              },
+	              "attr": {
+	                "value": "publish关"
+	              }
+	            }
+	          ]
+	        }
+	      ]
 	    }
 	  ]
 	})
@@ -332,7 +558,7 @@
 	  }
 	})
 	})
-	;__weex_bootstrap__("@weex-component/db75673081739c624df603db254ceccc", {
+	;__weex_bootstrap__("@weex-component/9b3a3dc841e8873b89a7a2f9d0a3826f", {
 	  "transformerVersion": "0.3.1"
 	},undefined)
 
