@@ -1,64 +1,148 @@
 <!-- style -->
 <style>
 .body-container{
-	background-color: #f6f7f8;	
+	/*background-color: #f6f7f8;	*/
 }
 .header-container{
-	padding-top: 66px;
+	padding-top: 80px;
+	padding-bottom: 100px;
+	background-color: #09f;	
+}
+.header-img{
+	width: 100%; 
+	height: 200px;
+	margin-top: 60px;
+}
+.close-win{
+	width: 30px; 
+	height: 30px;
+	margin-left:20px;
+}
+.user-box{
+	flex-direction:row;
+	margin-top:60px;
+	margin-left:60px;
+	margin-right:60px;
+}
+/*loginbox*/
+/*.user-lab{
+	height: 70px;
+	color: #666;
+	font-size: 30px;
+	line-height: 70px;
+	padding-left:60px;
+	padding-right:60px;
+}*/
+.user-input{
+	flex:1;
+	height: 70px;
+	line-height: 70px;
+	font-size: 30px;
+	/*border-bottom: 1px solid #666;*/
+	border-style: solid;
+	border-bottom-width: 1px;
+	border-color: #666;
+}
+.foget-box{
+	margin-top:30px;
+	margin-right:60px;
+}
+.foget-btn{
+	font-size: 24px;
+	color: #999;
+	text-align: right;
 }
 .login-box{
 	flex-direction:row;
-	/*justify-content:space-between;*/
+	margin-top:60px;
+	margin-left:60px;
+	margin-right:60px;
 }
-  .row {
-    flex-direction: row;
-  }
-    .item {
-    margin-right: 10px;
-    /*margin-bottom: 10px;*/
-    width: 160px;
-    height: 75px;
-    padding-left: 8px;
-    padding-right: 8px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-  }
-
-  .txt {
-    color: #eee;
-  }
-  .username{
-  	margin-right:0;
-  	flex:1;
-  	height: 70px;
-  	font-size: 20px;
-  }
+.login-btn{
+	flex:1;
+	height: 80px;
+	line-height: 80px;
+	font-size: 30px;
+	color: #666;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #999;
+	text-align: center;
+	border-radius:10px;
+}
 </style>
 <!-- body -->
 <template>
 	<div class="body-container">
 		<div class="header-container">
-			
+			<image class="close-win" src="http://ac-pa07cjgz.clouddn.com/1978293856961f80.png"></image>
+			<image class="header-img" src="http://ac-pa07cjgz.clouddn.com/43a0fdaf26663a0f.png" resize="contain"></image>
 		</div>
-
-		<div class="login-box">
-			<div>
-				<text class="ey-start-btn"></text>
-			</div>
-			<div>
-				<input class="ey-stop-btn" placeholder="用户名"></input>
-			</div>
+		<div class="user-box">
+			<!-- <text class="user-lab" value="用户名" style=" "></text> -->
+			<input class='user-input' placeholder="手机号/邮箱" oninput="onusernameinput"></input>
+		</div>		
+		<div class="user-box">
+			<input class='user-input' type="password" placeholder="密码"  oninput="onpswinput"></input>
+		</div>		
+		<div class="foget-box">
+			<text class="foget-btn">忘记密码?</text>
 		</div>
-      <div class="row" style="align-items: flex-start">
-      	  <text class="item txt" value="开始配网" style="margin-right:0;background-color:#BEAD92; "></text>
-        <input class='username' placeholder="用户名"></input>
-      </div>
+		<div class="login-box" onclick="login">
+			<text class="login-btn">登录</text>
+		</div>
 	</div>			
 </template>
 <!-- script -->
 <script>
+const _APPID = "db456b4a-17fc-11e6-a739-00163e0204c0";
+const _HOST_HEAD = 'https://v2.fogcloud.io/enduser/';
+const _LOGIN = _HOST_HEAD + "login/";
+
+require('weex-components');
+var fogstream = null;
 module.exports = {
+	data:{
+		username:"",
+		password:"",
+	},
+	created:function(){
+		fogstream = require('@weex-module/stream');
+	},
 	methods: {
+		onusernameinput:function(event){
+			this.username = event.value;
+		},
+		onpswinput:function(event){
+			this.password = event.value;
+		},
+		login:function(){
+			var that = this;
+			// fogstream = require('@weex-module/stream');
+			console.log(that.username);
+			console.log(that.password);
+	        fogstream.fetch({
+	          method: 'POST',
+	          // url: 'http://192.168.3.186:8000/enduser/getVerCode/',
+	          url: _LOGIN,
+	          type:'json',
+	          body: JSON.stringify({
+	            loginname: that.username,
+	            password:that.password,
+	            appid:_APPID
+	          }),
+	          //android端会默认多了一个Content-Type: application/x-www-form-urlencoded
+	          //所以这里需要添加 "Content-Type": "application/json"，但是添加后HTML服务器端收到body为空
+	          //发送的json变为JSONString，则可以解决这个问题
+	          headers:{
+	            "Content-Type":"application/json"
+	          }
+	        }, function(response) {
+	          console.log("res 1:"+JSON.stringify(response));
+	        },function(response){
+	          console.log("bytes received:"+response.length);
+	        });
+		},
 		fetchFunc:function(){
 	        console.log("stream");
 	        var stream = require('@weex-module/stream');
