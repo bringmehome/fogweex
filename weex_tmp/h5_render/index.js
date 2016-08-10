@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	;__weex_define__("@weex-component/778cc9e61f764565fe21582458ff3e5d", [], function(__weex_require__, __weex_exports__, __weex_module__){
+	;__weex_define__("@weex-component/f87dbb9ed4c0b2f7412b99e72dcbfb2d", [], function(__weex_require__, __weex_exports__, __weex_module__){
 
 	;
 	const _APPID = "db456b4a-17fc-11e6-a739-00163e0204c0";
@@ -69,34 +69,33 @@
 				this.password = event.value;
 			},
 			login:function(){
-				this.$openURL("http://192.168.3.199:8765/examples/build/index.js");
-				// var that = this;
-				// // fogstream = __weex_require__('@weex-module/stream');
-				// console.log(that.username);
-				// console.log(that.password);
-		  //       fogstream.fetch({
-		  //         method: 'POST',
-		  //         // url: 'http://192.168.3.186:8000/enduser/getVerCode/',
-		  //         url: _LOGIN,
-		  //         type:'json',
-		  //         body: JSON.stringify({
-		  //           loginname: that.username,
-		  //           password:that.password,
-		  //           appid:_APPID
-		  //         }),
-		  //         //android端会默认多了一个Content-Type: application/x-www-form-urlencoded
-		  //         //所以这里需要添加 "Content-Type": "application/json"，但是添加后HTML服务器端收到body为空
-		  //         //发送的json变为JSONString，则可以解决这个问题
-		  //         headers:{
-		  //           "Content-Type":"application/json"
-		  //         }
-		  //       }, function(response) {
-		  //         console.log("res 1:"+JSON.stringify(response));
-		  //         that.alert(JSON.stringify(response), "OK");
-		  //       },function(response){
-		  //         console.log("bytes received:"+response.length);
-		  //         that.alert(JSON.stringify(response), "OK");
-		  //       });
+				var that = this;
+				// fogstream = __weex_require__('@weex-module/stream');
+				console.log(that.username);
+				console.log(that.password);
+		        fogstream.fetch({
+		          method: 'POST',
+		          // url: 'http://192.168.3.186:8000/enduser/getVerCode/',
+		          url: _LOGIN,
+		          type:'json',
+		          body: JSON.stringify({
+		            loginname: that.username,
+		            password:that.password,
+		            appid:_APPID
+		          }),
+		          //android端会默认多了一个Content-Type: application/x-www-form-urlencoded
+		          //所以这里需要添加 "Content-Type": "application/json"，但是添加后HTML服务器端收到body为空
+		          //发送的json变为JSONString，则可以解决这个问题
+		          headers:{
+		            "Content-Type":"application/json"
+		          }
+		        }, function(response) {
+		          console.log("res 1:"+JSON.stringify(response));
+		          that.alert(JSON.stringify(response), "OK");
+		        },function(response){
+		          console.log("bytes received:"+response.length);
+		          that.alert(JSON.stringify(response), "OK");
+		        });
 			},
 			fetchFunc:function(){
 		        console.log("stream");
@@ -188,6 +187,9 @@
 		        });
 
 	      	},
+	      	openURL:function(){
+				this.$openURL("http://192.168.3.199:8765/examples/build/index.js");
+	      	}
 		}
 	};
 
@@ -377,7 +379,7 @@
 	  }
 	})
 	})
-	;__weex_bootstrap__("@weex-component/778cc9e61f764565fe21582458ff3e5d", {
+	;__weex_bootstrap__("@weex-component/f87dbb9ed4c0b2f7412b99e72dcbfb2d", {
 	  "transformerVersion": "0.3.1"
 	},undefined)
 

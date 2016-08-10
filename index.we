@@ -119,34 +119,33 @@ module.exports = {
 			this.password = event.value;
 		},
 		login:function(){
-			this.$openURL("http://192.168.3.199:8765/examples/build/index.js");
-			// var that = this;
-			// // fogstream = require('@weex-module/stream');
-			// console.log(that.username);
-			// console.log(that.password);
-	  //       fogstream.fetch({
-	  //         method: 'POST',
-	  //         // url: 'http://192.168.3.186:8000/enduser/getVerCode/',
-	  //         url: _LOGIN,
-	  //         type:'json',
-	  //         body: JSON.stringify({
-	  //           loginname: that.username,
-	  //           password:that.password,
-	  //           appid:_APPID
-	  //         }),
-	  //         //android端会默认多了一个Content-Type: application/x-www-form-urlencoded
-	  //         //所以这里需要添加 "Content-Type": "application/json"，但是添加后HTML服务器端收到body为空
-	  //         //发送的json变为JSONString，则可以解决这个问题
-	  //         headers:{
-	  //           "Content-Type":"application/json"
-	  //         }
-	  //       }, function(response) {
-	  //         console.log("res 1:"+JSON.stringify(response));
-	  //         that.alert(JSON.stringify(response), "OK");
-	  //       },function(response){
-	  //         console.log("bytes received:"+response.length);
-	  //         that.alert(JSON.stringify(response), "OK");
-	  //       });
+			var that = this;
+			// fogstream = require('@weex-module/stream');
+			console.log(that.username);
+			console.log(that.password);
+	        fogstream.fetch({
+	          method: 'POST',
+	          // url: 'http://192.168.3.186:8000/enduser/getVerCode/',
+	          url: _LOGIN,
+	          type:'json',
+	          body: JSON.stringify({
+	            loginname: that.username,
+	            password:that.password,
+	            appid:_APPID
+	          }),
+	          //android端会默认多了一个Content-Type: application/x-www-form-urlencoded
+	          //所以这里需要添加 "Content-Type": "application/json"，但是添加后HTML服务器端收到body为空
+	          //发送的json变为JSONString，则可以解决这个问题
+	          headers:{
+	            "Content-Type":"application/json"
+	          }
+	        }, function(response) {
+	          console.log("res 1:"+JSON.stringify(response));
+	          that.alert(JSON.stringify(response), "OK");
+	        },function(response){
+	          console.log("bytes received:"+response.length);
+	          that.alert(JSON.stringify(response), "OK");
+	        });
 		},
 		fetchFunc:function(){
 	        console.log("stream");
@@ -238,6 +237,9 @@ module.exports = {
 	        });
 
       	},
+      	openURL:function(){
+			this.$openURL("http://192.168.3.199:8765/examples/build/index.js");
+      	}
 	}
 };
 </script>
