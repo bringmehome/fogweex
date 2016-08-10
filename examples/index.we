@@ -32,7 +32,7 @@
 
         // module
         {name: 'module/instance-api', title: 'Instance API'},
-        {name: 'module/modal', title: 'Modal'},
+        {name: 'module/modal', title: 'Toast'},
         {name: 'module/stream-demo', title: 'Stream'},
         {name: 'module/clipboard', title: 'Clipboard'},
         
