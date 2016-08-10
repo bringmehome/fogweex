@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports) {
 
-	;__weex_define__("@weex-component/7f3524ded914820209120035e743ed51", [], function(__weex_require__, __weex_exports__, __weex_module__){
+	;__weex_define__("@weex-component/aeb9e9c6fd776e6dce3ca0d602a21dc2", [], function(__weex_require__, __weex_exports__, __weex_module__){
 
 	;
 	__weex_module__.exports = {
@@ -134,10 +134,7 @@
 	              "type": "text",
 	              "classList": [
 	                "ey-start-btn"
-	              ],
-	              "attr": {
-	                "value": "开始配网"
-	              }
+	              ]
 	            }
 	          ]
 	        },
@@ -156,6 +153,40 @@
 	          ]
 	        }
 	      ]
+	    },
+	    {
+	      "type": "div",
+	      "classList": [
+	        "row"
+	      ],
+	      "style": {
+	        "alignItems": "flex-start"
+	      },
+	      "children": [
+	        {
+	          "type": "text",
+	          "classList": [
+	            "item",
+	            "txt"
+	          ],
+	          "attr": {
+	            "value": "开始配网"
+	          },
+	          "style": {
+	            "marginRight": 0,
+	            "backgroundColor": "#BEAD92"
+	          }
+	        },
+	        {
+	          "type": "input",
+	          "classList": [
+	            "username"
+	          ],
+	          "attr": {
+	            "placeholder": "用户名"
+	          }
+	        }
+	      ]
 	    }
 	  ]
 	})
@@ -169,10 +200,31 @@
 	  },
 	  "login-box": {
 	    "flexDirection": "row"
+	  },
+	  "row": {
+	    "flexDirection": "row"
+	  },
+	  "item": {
+	    "marginRight": 10,
+	    "width": 160,
+	    "height": 75,
+	    "paddingLeft": 8,
+	    "paddingRight": 8,
+	    "paddingTop": 8,
+	    "paddingBottom": 8
+	  },
+	  "txt": {
+	    "color": "#eeeeee"
+	  },
+	  "username": {
+	    "marginRight": 0,
+	    "flex": 1,
+	    "height": 70,
+	    "fontSize": 20
 	  }
 	})
 	})
-	;__weex_bootstrap__("@weex-component/7f3524ded914820209120035e743ed51", {
+	;__weex_bootstrap__("@weex-component/aeb9e9c6fd776e6dce3ca0d602a21dc2", {
 	  "transformerVersion": "0.3.1"
 	},undefined)
 

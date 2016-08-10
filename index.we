@@ -10,6 +10,29 @@
 	flex-direction:row;
 	/*justify-content:space-between;*/
 }
+  .row {
+    flex-direction: row;
+  }
+    .item {
+    margin-right: 10px;
+    /*margin-bottom: 10px;*/
+    width: 160px;
+    height: 75px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .txt {
+    color: #eee;
+  }
+  .username{
+  	margin-right:0;
+  	flex:1;
+  	height: 70px;
+  	font-size: 20px;
+  }
 </style>
 <!-- body -->
 <template>
@@ -20,12 +43,16 @@
 
 		<div class="login-box">
 			<div>
-				<text class="ey-start-btn">开始配网</text>
+				<text class="ey-start-btn"></text>
 			</div>
 			<div>
 				<input class="ey-stop-btn" placeholder="用户名"></input>
 			</div>
 		</div>
+      <div class="row" style="align-items: flex-start">
+      	  <text class="item txt" value="开始配网" style="margin-right:0;background-color:#BEAD92; "></text>
+        <input class='username' placeholder="用户名"></input>
+      </div>
 	</div>			
 </template>
 <!-- script -->

@@ -12,7 +12,11 @@
     data: {
       root: '', // examples, examples/syntax, test ...
       items: [
-        {name: 'hello', title: 'Hello World', url: ''}
+        {
+          name: 'hello', 
+          title: 'Hello World', 
+          url: ''
+        }
       ]
     },
     created: function() {

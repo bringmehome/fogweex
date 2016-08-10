@@ -12,7 +12,7 @@
         // Support sub directory, e.g. 'new-fashion/index'
         {name: 'hello', title: 'Hello World'},
         {name: 'syntax/index', title: 'More Syntax'},
-        {name: 'style/index', title: 'Common Style'},
+        {name: 'style/index', title: '通用样式'},
         {name: 'animation', title: '动画'},
         // component
         {name: 'component/text-demo', title: 'Text'},
