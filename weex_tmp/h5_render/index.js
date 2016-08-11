@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	;__weex_define__("@weex-component/f87dbb9ed4c0b2f7412b99e72dcbfb2d", [], function(__weex_require__, __weex_exports__, __weex_module__){
+	;__weex_define__("@weex-component/03cefb9625ef4fa4a0f712e7f2651197", [], function(__weex_require__, __weex_exports__, __weex_module__){
 
 	;
 	const _APPID = "db456b4a-17fc-11e6-a739-00163e0204c0";
@@ -155,11 +155,14 @@
 		        //   console.log("res json", JSON.stringify(json));
 		        // });
 	      	},
-	      	pop: function() {
-		        var params = {
-		          'animated' : 'false',
-		        }
-		        vm.$call('navigator','pop',params, function () {});
+	      	popthiswin: function() {
+				var params = {
+				    'animated' : 'true',
+				}
+				var navigator = __weex_require__('@weex-module/navigator');
+				navigator.pop(params, function(e) {
+				    //callback
+				});
 	      	},
 	      	toast: function(msg, duration) {
 		        if (!msg || typeof msg !== 'string') {
@@ -185,10 +188,10 @@
 		          'cancelTitle': cancelTitle
 		        }, function() {
 		        });
-
 	      	},
 	      	openURL:function(){
-				this.$openURL("http://192.168.3.199:8765/examples/build/index.js");
+	      		console.log("--openurl---");
+				this.$openURL("http://192.168.3.199:8081/weex_tmp/h5_render/fogetpsw.js");
 	      	}
 		}
 	};
@@ -215,7 +218,7 @@
 	            "src": "http://ac-pa07cjgz.clouddn.com/1978293856961f80.png"
 	          },
 	          "events": {
-	            "click": "toast"
+	            "click": "popthiswin"
 	          }
 	        },
 	        {
@@ -276,23 +279,18 @@
 	      "classList": [
 	        "foget-box"
 	      ],
+	      "events": {
+	        "click": "openURL"
+	      },
 	      "children": [
 	        {
-	          "type": "a",
+	          "type": "text",
+	          "classList": [
+	            "foget-btn"
+	          ],
 	          "attr": {
-	            "href": "http://192.168.3.199:8765/examples/build/index.js"
-	          },
-	          "children": [
-	            {
-	              "type": "text",
-	              "classList": [
-	                "foget-btn"
-	              ],
-	              "attr": {
-	                "value": "忘记密码?"
-	              }
-	            }
-	          ]
+	            "value": "忘记密码?"
+	          }
 	        }
 	      ]
 	    },
@@ -379,7 +377,7 @@
 	  }
 	})
 	})
-	;__weex_bootstrap__("@weex-component/f87dbb9ed4c0b2f7412b99e72dcbfb2d", {
+	;__weex_bootstrap__("@weex-component/03cefb9625ef4fa4a0f712e7f2651197", {
 	  "transformerVersion": "0.3.1"
 	},undefined)
 

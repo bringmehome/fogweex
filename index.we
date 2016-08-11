@@ -75,7 +75,7 @@
 <template>
 	<div class="body-container">
 		<div class="header-container">
-			<image class="close-win" src="http://ac-pa07cjgz.clouddn.com/1978293856961f80.png" onclick="toast"></image>
+			<image class="close-win" src="http://ac-pa07cjgz.clouddn.com/1978293856961f80.png" onclick="popthiswin"></image>
 			<image class="header-img" src="http://ac-pa07cjgz.clouddn.com/43a0fdaf26663a0f.png" resize="contain"></image>
 		</div>
 		<div class="user-box">
@@ -85,15 +85,13 @@
 		<div class="user-box">
 			<input class='user-input' type="password" placeholder="密码"  oninput="onpswinput"></input>
 		</div>	
-		<div class="foget-box">
-			<a href="http://192.168.3.199:8765/examples/build/index.js">
-				<text class="foget-btn">忘记密码?</text>
-      		</a>	
+		<div class="foget-box" onclick="openURL">
+			<text class="foget-btn">忘记密码?</text>
 		</div>
 		<div class="login-box" onclick="login">
 			<text class="login-btn">登录</text>
 		</div>
-	</div>			
+	</div>
 </template>
 <!-- script -->
 <script>
@@ -205,11 +203,14 @@ module.exports = {
 	        //   console.log("res json", JSON.stringify(json));
 	        // });
       	},
-      	pop: function() {
-	        var params = {
-	          'animated' : 'false',
-	        }
-	        vm.$call('navigator','pop',params, function () {});
+      	popthiswin: function() {
+			var params = {
+			    'animated' : 'true',
+			}
+			var navigator = require('@weex-module/navigator');
+			navigator.pop(params, function(e) {
+			    //callback
+			});
       	},
       	toast: function(msg, duration) {
 	        if (!msg || typeof msg !== 'string') {
@@ -235,10 +236,10 @@ module.exports = {
 	          'cancelTitle': cancelTitle
 	        }, function() {
 	        });
-
       	},
       	openURL:function(){
-			this.$openURL("http://192.168.3.199:8765/examples/build/index.js");
+      		console.log("--openurl---");
+			this.$openURL("http://192.168.3.199:8081/weex_tmp/h5_render/fogetpsw.js");
       	}
 	}
 };

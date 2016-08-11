@@ -1,0 +1,14 @@
+<template>
+  <container>
+    <text style="font-size: {{size}}">{{title}}</text>
+  </container>
+</template>
+
+<script>
+  module.exports = {
+    data: {
+      size: 48,
+      title: '忘记密码页面'
+    }
+  }
+</script>
