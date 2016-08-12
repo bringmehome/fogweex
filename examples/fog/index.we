@@ -91,6 +91,11 @@
 		<div class="login-box" onclick="login">
 			<text class="login-btn">登录</text>
 		</div>
+		<!-- <div>
+			<a href="http://g.tbcdn.cn/ali-wireless-h5/res/0.0.16/hello.js">
+				<text style="font-size:60px; color:#f00; height:70px;">Click me to see</text>
+			</a>
+		</div> -->
 	</div>
 </template>
 <!-- script -->
@@ -239,7 +244,7 @@ module.exports = {
       	},
       	openURL:function(){
       		console.log("--openurl---");
-			this.$openURL("http://192.168.3.199:8081/weex_tmp/h5_render/fogetpsw.js");
+			this.$openURL("http://192.168.3.199:8765/examples/build/fog/fogetpsw.js");
       	}
 	}
 };

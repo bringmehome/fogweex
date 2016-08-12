@@ -44,340 +44,152 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	;__weex_define__("@weex-component/03cefb9625ef4fa4a0f712e7f2651197", [], function(__weex_require__, __weex_exports__, __weex_module__){
+	;__weex_define__("@weex-component/1ed7d260fb63a2b15ae1ca6f27fb4533", [], function(__weex_require__, __weex_exports__, __weex_module__){
 
 	;
-	const _APPID = "db456b4a-17fc-11e6-a739-00163e0204c0";
-	const _HOST_HEAD = 'https://v2.fogcloud.io/enduser/';
-	const _LOGIN = _HOST_HEAD + "login/";
+	  __webpack_require__(1);
+	  __weex_module__.exports = {
+	    data: function () {return {
+	      navBarHeight: 88,
+	      title: '标题',
+	      dir: 'examples',
+	      baseURL: '',
+	    }},
+	    created: function() {
+	        this.$getConfig(function (config) {
+	            var env = config.env;
+	            if(env.platform == 'iOS'){
+	              var scale = env.scale;
+	              var deviceWidth = env.deviceWidth / scale;
+	              this.navBarHeight = 1;
+	              // this.navBarHeight = 64.0 * 750.0 / deviceWidth;
+	            }   
+	        }.bind(this));
 
-	__webpack_require__(1);
-	var fogstream = null;
-	__weex_module__.exports = {
-		data:function () {return {
-			username:"",
-			password:"",
-		}},
-		created:function(){
-			fogstream = __weex_require__('@weex-module/stream');
-		},
-		methods: {
-			onusernameinput:function(event){
-				this.username = event.value;
-			},
-			onpswinput:function(event){
-				this.password = event.value;
-			},
-			login:function(){
-				var that = this;
-				// fogstream = __weex_require__('@weex-module/stream');
-				console.log(that.username);
-				console.log(that.password);
-		        fogstream.fetch({
-		          method: 'POST',
-		          // url: 'http://192.168.3.186:8000/enduser/getVerCode/',
-		          url: _LOGIN,
-		          type:'json',
-		          body: JSON.stringify({
-		            loginname: that.username,
-		            password:that.password,
-		            appid:_APPID
-		          }),
-		          //android端会默认多了一个Content-Type: application/x-www-form-urlencoded
-		          //所以这里需要添加 "Content-Type": "application/json"，但是添加后HTML服务器端收到body为空
-		          //发送的json变为JSONString，则可以解决这个问题
-		          headers:{
-		            "Content-Type":"application/json"
-		          }
-		        }, function(response) {
-		          console.log("res 1:"+JSON.stringify(response));
-		          that.alert(JSON.stringify(response), "OK");
-		        },function(response){
-		          console.log("bytes received:"+response.length);
-		          that.alert(JSON.stringify(response), "OK");
-		        });
-			},
-			fetchFunc:function(){
-		        console.log("stream");
-		        var stream = __weex_require__('@weex-module/stream');
-		        stream.fetch({
-		          method: 'POST',
-		          // url: 'http://192.168.3.186:8000/enduser/getVerCode/',
-		          url: 'https://v2.fogcloud.io/enduser/getVerCode/',
-		          type:'json',
-		          body: JSON.stringify({
-		            loginname:"88635653@qq.com",
-		            // appid:"a94def5e-41b2-11e6-a4ef-f8cab81d2727"
-		            appid:"db456b4a-17fc-11e6-a739-00163e0204c0"
-		          }),
-		          //android端会默认多了一个Content-Type: application/x-www-form-urlencoded
-		          //所以这里需要添加 "Content-Type": "application/json"，但是添加后HTML服务器端收到body为空
-		          //发送的json变为JSONString，则可以解决这个问题
-		          headers:{
-		            "Content-Type":"application/json"
-		          }
-		        }, function(response) {
-		          console.log("res 1:"+JSON.stringify(response));
-		          this.toast(JSON.stringify(response), 2);
-		        },function(response){
-		          console.log("bytes received:"+response.length);
-		          this.toast(JSON.stringify(response), 2);
-		        });
+	        this.$on('naviBar.rightItem.click',function(e){
+	          duration = 2;
+	          this.$call('modal', 'toast', {
+	            'message': 'naviBar.rightItem.click',
+	            'duration': duration
+	           });
+	        });
 
-		        // stream.fetch({
-		        //   method: 'POST',
-		        //   url: 'http://www.easylink.io/v1/user/login',
-		        //   type:'json',
-		        //   body: {
-		        //     login_id:"13122112211",
-		        //     password:"123456"
-		        //   },
-		        //   headers:{
-		        //     "X-Application-Id":"7ffbec46-7ff9-46fc-bb55-ec1dda89f40c"
-		        //   }
-		        // }, function(response) {
-		        //   console.log("res 1:"+JSON.stringify(response));
-		        //   //process response
-		        // },function(response){
-		        //   console.log("bytes received:"+response.length);
-		        // });
+	        this.$on('naviBar.leftItem.click',function(e){
+	          duration = 2;
+	          this.$call('modal', 'toast', {
+	            'message': 'naviBar.leftItem.click',
+	            'duration': duration
+	           });  
+	        });
 
-		        // stream.fetch({
-		        //   method: 'POST',
-		        //   url: "http://httpbin.org/post",
-		        //   type:'json',
-		        //   body: {
-		        //     a:1
-		        //   }
-		        // }, function(response) {
-		        //   console.log("res response", JSON.stringify(response));
-		        // },function(json){
-		        //   console.log("res json", JSON.stringify(json));
-		        // });
-	      	},
-	      	popthiswin: function() {
-				var params = {
-				    'animated' : 'true',
-				}
-				var navigator = __weex_require__('@weex-module/navigator');
-				navigator.pop(params, function(e) {
-				    //callback
-				});
-	      	},
-	      	toast: function(msg, duration) {
-		        if (!msg || typeof msg !== 'string') {
-		          msg = 'I am Toast show!';
-		        }
+	        var bundleUrl = this.$getConfig().bundleUrl;
+	        bundleUrl = new String(bundleUrl);
+	        console.log('hit', bundleUrl);
+	        var nativeBase;
+	        var isAndroidAssets = bundleUrl.indexOf('file://assets/') >= 0;
 
-		        duration = duration || 2;
-		        var modal = __weex_require__('@weex-module/modal');
-		        modal.toast({
-		          'message': msg,
-		          'duration': duration
-		        });
-	      	},
-	      	alert: function(msg, okTitle, cancelTitle) {
-		        var self = this;
-		        if (!msg || typeof msg !== 'string') {
-		          msg = "I am Alert!";
-		        }
-		         var modal = __weex_require__('@weex-module/modal');
-		         modal.alert({
-		          'message': msg,
-		          'okTitle': okTitle,
-		          'cancelTitle': cancelTitle
-		        }, function() {
-		        });
-	      	},
-	      	openURL:function(){
-	      		console.log("--openurl---");
-				this.$openURL("http://192.168.3.199:8081/weex_tmp/h5_render/fogetpsw.js");
-	      	}
-		}
-	};
+	        var isiOSAssets = bundleUrl.indexOf('file:///') >= 0 && bundleUrl.indexOf('WeexDemo.app') > 0;
+	        if (isAndroidAssets) {
+	          nativeBase = 'file://assets/';
+	        }
+	        else if (isiOSAssets) {
+	          // file:///var/mobile/Containers/Bundle/Application/{id}/WeexDemo.app/
+	          // file:///Users/{user}/Library/Developer/CoreSimulator/Devices/{id}/data/Containers/Bundle/Application/{id}/WeexDemo.app/
+	          nativeBase = bundleUrl.substring(0, bundleUrl.lastIndexOf('/') + 1);
+	        }
+	        else {
+	          var host = 'localhost:12580';
+	          var matches = /\/\/([^\/]+?)\//.exec(this.$getConfig().bundleUrl);
+	          if (matches && matches.length >= 2) {
+	            host = matches[1];
+	          }
+	          nativeBase = 'http://' + host + '/' + this.dir + '/build/';
+	        }
+	        var h5Base = './index.html?page=./' + this.dir + '/build/';
+	        // in Native
+	        var base = nativeBase;
+	        if (typeof window === 'object') {
+	          // in Browser or WebView
+	          base = h5Base;
+	        }
+	        this.baseURL = base;     
+	    },
+	    methods: {
+	      push: function() {
+	        var vm = this;
+	        var params = {
+	          'url':  this.baseURL + 'component/navigator-demo.js?test=1',
+	          'animated' : 'true',
+	        }
+	        vm.$call('navigator','push',params, function () {});
+	      },
+
+	      pop: function() {
+	        var vm = this;
+	        var params = {
+	          'animated' : 'true',
+	        }
+	        vm.$call('navigator','pop',params, function () {});
+	      },
+	    }
+	  }
 
 	;__weex_module__.exports.template = __weex_module__.exports.template || {}
 	;Object.assign(__weex_module__.exports.template, {
-	  "type": "div",
-	  "classList": [
-	    "body-container"
-	  ],
+	  "type": "wxc-navpage",
+	  "attr": {
+	    "dataRole": "none",
+	    "height": function () {return this.navBarHeight},
+	    "backgroundColor": "#ff5898",
+	    "title": function () {return this.title},
+	    "titleColor": "white",
+	    "leftItemTitle": "左边",
+	    "leftItemColor": "white",
+	    "rightItemSrc": "http://gtms02.alicdn.com/tps/i2/TB1ED7iMpXXXXXEXXXXWA_BHXXX-48-48.png"
+	  },
 	  "children": [
 	    {
-	      "type": "div",
-	      "classList": [
-	        "header-container"
-	      ],
-	      "children": [
-	        {
-	          "type": "image",
-	          "classList": [
-	            "close-win"
-	          ],
-	          "attr": {
-	            "src": "http://ac-pa07cjgz.clouddn.com/1978293856961f80.png"
-	          },
-	          "events": {
-	            "click": "popthiswin"
-	          }
-	        },
-	        {
-	          "type": "image",
-	          "classList": [
-	            "header-img"
-	          ],
-	          "attr": {
-	            "src": "http://ac-pa07cjgz.clouddn.com/43a0fdaf26663a0f.png",
-	            "resize": "contain"
-	          }
-	        }
-	      ]
-	    },
-	    {
-	      "type": "div",
-	      "classList": [
-	        "user-box"
-	      ],
-	      "children": [
-	        {
-	          "type": "input",
-	          "classList": [
-	            "user-input"
-	          ],
-	          "attr": {
-	            "placeholder": "手机号/邮箱"
-	          },
-	          "events": {
-	            "input": "onusernameinput"
-	          }
-	        }
-	      ]
-	    },
-	    {
-	      "type": "div",
-	      "classList": [
-	        "user-box"
-	      ],
-	      "children": [
-	        {
-	          "type": "input",
-	          "classList": [
-	            "user-input"
-	          ],
-	          "attr": {
-	            "type": "password",
-	            "placeholder": "密码"
-	          },
-	          "events": {
-	            "input": "onpswinput"
-	          }
-	        }
-	      ]
-	    },
-	    {
-	      "type": "div",
-	      "classList": [
-	        "foget-box"
-	      ],
-	      "events": {
-	        "click": "openURL"
+	      "type": "wxc-panel",
+	      "attr": {
+	        "title": "push a new page"
 	      },
 	      "children": [
 	        {
-	          "type": "text",
-	          "classList": [
-	            "foget-btn"
-	          ],
+	          "type": "wxc-button",
 	          "attr": {
-	            "value": "忘记密码?"
+	            "type": "primary",
+	            "size": "small",
+	            "value": "push"
+	          },
+	          "events": {
+	            "click": "push"
 	          }
 	        }
 	      ]
 	    },
 	    {
-	      "type": "div",
-	      "classList": [
-	        "login-box"
-	      ],
-	      "events": {
-	        "click": "login"
+	      "type": "wxc-panel",
+	      "attr": {
+	        "title": "pop to the last page"
 	      },
 	      "children": [
 	        {
-	          "type": "text",
-	          "classList": [
-	            "login-btn"
-	          ],
+	          "type": "wxc-button",
 	          "attr": {
-	            "value": "登录"
+	            "type": "success",
+	            "size": "small",
+	            "value": "pop"
+	          },
+	          "events": {
+	            "click": "pop"
 	          }
 	        }
 	      ]
 	    }
 	  ]
 	})
-	;__weex_module__.exports.style = __weex_module__.exports.style || {}
-	;Object.assign(__weex_module__.exports.style, {
-	  "body-container": {},
-	  "header-container": {
-	    "paddingTop": 80,
-	    "paddingBottom": 100,
-	    "backgroundColor": "#0099ff"
-	  },
-	  "header-img": {
-	    "height": 200,
-	    "marginTop": 60
-	  },
-	  "close-win": {
-	    "width": 30,
-	    "height": 30,
-	    "marginLeft": 20
-	  },
-	  "user-box": {
-	    "flexDirection": "row",
-	    "marginTop": 60,
-	    "marginLeft": 60,
-	    "marginRight": 60
-	  },
-	  "user-input": {
-	    "flex": 1,
-	    "height": 70,
-	    "lineHeight": 70,
-	    "fontSize": 30,
-	    "borderStyle": "solid",
-	    "borderBottomWidth": 1,
-	    "borderColor": "#666666"
-	  },
-	  "foget-box": {
-	    "marginTop": 30,
-	    "marginRight": 60
-	  },
-	  "foget-btn": {
-	    "fontSize": 24,
-	    "color": "#999999",
-	    "textAlign": "right"
-	  },
-	  "login-box": {
-	    "flexDirection": "row",
-	    "marginTop": 60,
-	    "marginLeft": 60,
-	    "marginRight": 60
-	  },
-	  "login-btn": {
-	    "flex": 1,
-	    "height": 80,
-	    "lineHeight": 80,
-	    "fontSize": 30,
-	    "color": "#666666",
-	    "borderStyle": "solid",
-	    "borderWidth": 1,
-	    "borderColor": "#999999",
-	    "textAlign": "center",
-	    "borderRadius": 10
-	  }
 	})
-	})
-	;__weex_bootstrap__("@weex-component/03cefb9625ef4fa4a0f712e7f2651197", {
+	;__weex_bootstrap__("@weex-component/1ed7d260fb63a2b15ae1ca6f27fb4533", {
 	  "transformerVersion": "0.3.1"
 	},undefined)
 
